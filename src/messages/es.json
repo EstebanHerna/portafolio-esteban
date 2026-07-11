@@ -7,6 +7,7 @@
   "nav": {
     "home": "Inicio",
     "projects": "Proyectos",
+    "explore": "Explorar",
     "process": "Proceso",
     "timeline": "Trayectoria",
     "about": "Sobre mi",
@@ -42,6 +43,20 @@
     "repoPrivate": "Repositorio no publico por ahora",
     "backToProjects": "Volver a proyectos",
     "featuredBadge": "Ancla"
+  },
+  "explore": {
+    "title": "Explorar",
+    "subtitle": "Busca en todo el contenido del portafolio -proyectos, trayectoria, stack y certificaciones- y filtra por tipo. La busqueda corre en tu navegador, sin servidores.",
+    "label": "Buscar en el portafolio",
+    "placeholder": "Prueba: vision por computador, AWS, seguridad, ROS2...",
+    "filterLabel": "Filtrar por tipo",
+    "results": "{count, plural, =0 {Sin resultados} one {# resultado} other {# resultados}}",
+    "noResults": "No hay coincidencias. Prueba con otros terminos o quita el filtro.",
+    "type_all": "Todo",
+    "type_project": "Proyectos",
+    "type_milestone": "Trayectoria",
+    "type_stack": "Stack",
+    "type_cert": "Certificaciones"
   },
   "process": {
     "title": "Como construyo con IA",

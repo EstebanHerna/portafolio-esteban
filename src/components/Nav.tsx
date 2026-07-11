@@ -9,6 +9,7 @@ import { Menu, X } from 'lucide-react';
 const items = [
   { href: '/', key: 'home' as const },
   { href: '/proyectos', key: 'projects' as const },
+  { href: '/explorar', key: 'explore' as const },
   { href: '/proceso', key: 'process' as const },
   { href: '/trayectoria', key: 'timeline' as const },
   { href: '/sobre-mi', key: 'about' as const },

@@ -7,6 +7,7 @@
   "nav": {
     "home": "Home",
     "projects": "Projects",
+    "explore": "Explore",
     "process": "Process",
     "timeline": "Timeline",
     "about": "About",
@@ -42,6 +43,20 @@
     "repoPrivate": "Repository not public yet",
     "backToProjects": "Back to projects",
     "featuredBadge": "Anchor"
+  },
+  "explore": {
+    "title": "Explore",
+    "subtitle": "Search across all portfolio content -projects, timeline, stack, and certifications- and filter by type. Search runs in your browser, no servers.",
+    "label": "Search the portfolio",
+    "placeholder": "Try: computer vision, AWS, security, ROS2...",
+    "filterLabel": "Filter by type",
+    "results": "{count, plural, =0 {No results} one {# result} other {# results}}",
+    "noResults": "No matches. Try other terms or clear the filter.",
+    "type_all": "All",
+    "type_project": "Projects",
+    "type_milestone": "Timeline",
+    "type_stack": "Stack",
+    "type_cert": "Certifications"
   },
   "process": {
     "title": "How I build with AI",
