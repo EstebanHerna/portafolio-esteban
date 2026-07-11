@@ -16,6 +16,10 @@ permissions:
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    # CodeQL (code scanning) es gratis en repos publicos; en privados exige GitHub
+    # Advanced Security. Mientras el repo sea privado el job se omite (no falla el
+    # CI) y se activa solo al hacerlo publico.
+    if: ${{ github.event.repository.private == false }}
     strategy:
       matrix:
         language: [javascript-typescript]
