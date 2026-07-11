@@ -1,0 +1,5 @@
+# Politica de divulgacion responsable - Portafolio de Esteban Hernandez
+Contact: mailto:ea.hernandezs1@uniandes.edu.co
+Expires: 2027-07-05T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://esteban-hernandez.vercel.app/.well-known/security.txt

@@ -1,0 +1,10 @@
+title = "gitleaks config - portafolio-esteban"
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Falsos positivos conocidos"
+paths = [
+  '''package-lock\.json''',
+  '''\.env\.example''',
+]

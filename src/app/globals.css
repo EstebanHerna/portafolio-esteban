@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 244 240 230; /* bone */
+    --fg: 26 23 18; /* ink */
+    --accent: 184 134 47; /* agar */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    @apply bg-bone font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent) / 0.28);
+    color: rgb(var(--fg));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif tracking-tightish text-ink;
+    font-variation-settings: 'opsz' 40;
+  }
+}
+
+@layer components {
+  .editorial-grid {
+    @apply mx-auto grid w-full max-w-editorial grid-cols-4 gap-x-6 px-5 md:grid-cols-12 md:px-8;
+  }
+
+  /* Filete de laboratorio: linea + punto de acento */
+  .lab-rule {
+    @apply relative border-t border-line pt-3;
+  }
+  .lab-rule::before {
+    content: '';
+    @apply absolute left-0 top-0 h-px w-10 -translate-y-px bg-agar;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted;
+  }
+
+  .link-underline {
+    @apply relative font-medium text-ink underline decoration-agar decoration-2 underline-offset-4 transition-colors hover:text-agar-deep;
+  }
+
+  .data-chip {
+    @apply inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-xs text-ink-soft;
+  }
+
+  .prose-editorial p {
+    @apply max-w-prose text-[1.05rem] leading-relaxed text-ink-soft;
+  }
+}
+
+/* Marca de agua de retícula tipo cuaderno, muy sutil */
+.notebook-lines {
+  background-image: linear-gradient(to bottom, transparent 31px, rgb(216 208 190 / 0.35) 32px);
+  background-size: 100% 32px;
+}

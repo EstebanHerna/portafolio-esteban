@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# Escaneo de secretos y gates antes de cada commit (igual que en HemoVision).
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --redact || {
+    echo "gitleaks: posible secreto detectado. Commit abortado."; exit 1;
+  }
+fi
+npm run typecheck
+npm run lint
