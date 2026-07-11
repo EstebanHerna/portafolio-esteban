@@ -1,0 +1,13 @@
+# Finales de linea deterministas: LF en el repo para que Prettier (endOfLine=lf)
+# y el CI en Linux coincidan, sin importar el SO de quien clone.
+* text=auto eol=lf
+
+# Binarios: nunca normalizar.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

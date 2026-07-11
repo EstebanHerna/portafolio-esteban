@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "siteName": "Esteban Hernandez",
+    "defaultTitle": "Esteban Hernandez - Systems engineering and clinical microbiology",
+    "defaultDescription": "Systems engineer building production-grade software for real problems in clinical microbiology."
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "process": "Process",
+    "timeline": "Timeline",
+    "about": "About",
+    "contact": "Contact",
+    "skipToContent": "Skip to content",
+    "toggleMenu": "Open menu",
+    "language": "Language"
+  },
+  "home": {
+    "eyebrow": "Systems engineering - Uniandes",
+    "ctaProjects": "View projects",
+    "ctaProcess": "How I build",
+    "featuredTitle": "Anchor projects",
+    "featuredSubtitle": "Two pieces that carry the message: honest research and engineering rigor.",
+    "processTitle": "How I build with AI",
+    "processSubtitle": "Four verifiable stages, not a decorative animation.",
+    "processCta": "Walk through the process",
+    "turbidityCaption": "Turbidity curve of a blood culture. The same signal HemoVision analyzes."
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Every project reads in the same order: problem, what's built, what's pending, and where to verify it.",
+    "sectionProblem": "The problem",
+    "sectionBuilt": "Built and tested",
+    "sectionPending": "Pending validation",
+    "sectionMetrics": "Metrics",
+    "sectionDisclaimer": "Methodological note",
+    "sectionTeam": "Team",
+    "sectionStack": "Stack",
+    "role": "Role",
+    "status": "Status",
+    "viewRepo": "View repository",
+    "repoPrivate": "Repository not public yet",
+    "backToProjects": "Back to projects",
+    "featuredBadge": "Anchor"
+  },
+  "process": {
+    "title": "How I build with AI",
+    "subtitle": "The four-stage flow used to build HemoVision and this very site. Each node shows real evidence.",
+    "expand": "Expand stage",
+    "collapse": "Collapse stage",
+    "evidenceTitle": "What this stage produced"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "The last few years in order, told as progress."
+  },
+  "about": {
+    "title": "About",
+    "academicTitle": "Education",
+    "stackTitle": "Technical stack",
+    "certsTitle": "Certifications",
+    "languagesTitle": "Languages",
+    "coursesTitle": "Relevant courses",
+    "photoAlt": "Photo of Esteban Hernandez",
+    "certDate": "Date",
+    "certDatePending": "To confirm",
+    "certDuration": "Duration",
+    "certCode": "Code"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "For software, research, or collaboration opportunities.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent. Thank you, I'll reply soon.",
+    "errorGeneric": "Could not send. Please try again in a moment.",
+    "errorRate": "Too many submissions. Wait a few minutes before retrying.",
+    "errorValidation": "Check the fields: name, a valid email, and a message.",
+    "directTitle": "Or directly",
+    "emailLabel": "Email",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@email.com",
+    "messagePlaceholder": "Tell me what you have in mind"
+  },
+  "footer": {
+    "builtWith": "Built with Next.js and deployed on Vercel.",
+    "security": "Security policy",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The route you're looking for doesn't exist.",
+    "back": "Back to home"
+  }
+}

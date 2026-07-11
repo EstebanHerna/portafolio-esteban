@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "siteName": "Esteban Hernandez",
+    "defaultTitle": "Esteban Hernandez - Ingenieria de sistemas y microbiologia clinica",
+    "defaultDescription": "Ingeniero de sistemas que construye software de nivel produccion para problemas reales de microbiologia clinica."
+  },
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "process": "Proceso",
+    "timeline": "Trayectoria",
+    "about": "Sobre mi",
+    "contact": "Contacto",
+    "skipToContent": "Saltar al contenido",
+    "toggleMenu": "Abrir menu",
+    "language": "Idioma"
+  },
+  "home": {
+    "eyebrow": "Ingenieria de sistemas - Uniandes",
+    "ctaProjects": "Ver proyectos",
+    "ctaProcess": "Como construyo",
+    "featuredTitle": "Proyectos ancla",
+    "featuredSubtitle": "Dos piezas que sostienen el mensaje: investigacion honesta y rigor de ingenieria.",
+    "processTitle": "Como construyo con IA",
+    "processSubtitle": "Cuatro etapas verificables, no una animacion decorativa.",
+    "processCta": "Recorrer el proceso",
+    "turbidityCaption": "Curva de turbidez de un hemocultivo. La misma senal que analiza HemoVision."
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Cada proyecto se lee en el mismo orden: problema, lo construido, lo pendiente, y donde verificarlo.",
+    "sectionProblem": "El problema",
+    "sectionBuilt": "Lo construido y probado",
+    "sectionPending": "Lo pendiente por validar",
+    "sectionMetrics": "Metricas",
+    "sectionDisclaimer": "Aclaracion metodologica",
+    "sectionTeam": "Equipo",
+    "sectionStack": "Stack",
+    "role": "Rol",
+    "status": "Estado",
+    "viewRepo": "Ver repositorio",
+    "repoPrivate": "Repositorio no publico por ahora",
+    "backToProjects": "Volver a proyectos",
+    "featuredBadge": "Ancla"
+  },
+  "process": {
+    "title": "Como construyo con IA",
+    "subtitle": "El flujo de cuatro etapas con el que se construyeron HemoVision y este mismo sitio. Cada nodo muestra evidencia real.",
+    "expand": "Expandir etapa",
+    "collapse": "Contraer etapa",
+    "evidenceTitle": "Que produjo esta etapa"
+  },
+  "timeline": {
+    "title": "Trayectoria",
+    "subtitle": "Los ultimos anos en orden, contados como progreso."
+  },
+  "about": {
+    "title": "Sobre mi",
+    "academicTitle": "Formacion",
+    "stackTitle": "Stack tecnico",
+    "certsTitle": "Certificaciones",
+    "languagesTitle": "Idiomas",
+    "coursesTitle": "Cursos relevantes",
+    "photoAlt": "Foto de Esteban Hernandez",
+    "certDate": "Fecha",
+    "certDatePending": "Por confirmar",
+    "certDuration": "Duracion",
+    "certCode": "Codigo"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Para oportunidades de software, investigacion o colaboracion.",
+    "name": "Nombre",
+    "email": "Correo",
+    "message": "Mensaje",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "Mensaje enviado. Gracias, te respondere pronto.",
+    "errorGeneric": "No se pudo enviar. Intenta de nuevo en un momento.",
+    "errorRate": "Demasiados envios. Espera unos minutos antes de reintentar.",
+    "errorValidation": "Revisa los campos: nombre, correo valido y un mensaje.",
+    "directTitle": "O directamente",
+    "emailLabel": "Correo",
+    "namePlaceholder": "Tu nombre",
+    "emailPlaceholder": "tu@correo.com",
+    "messagePlaceholder": "Cuentame en que estas pensando"
+  },
+  "footer": {
+    "builtWith": "Construido con Next.js y desplegado en Vercel.",
+    "security": "Politica de seguridad",
+    "rights": "Todos los derechos reservados."
+  },
+  "notFound": {
+    "title": "Pagina no encontrada",
+    "description": "La ruta que buscas no existe.",
+    "back": "Volver al inicio"
+  }
+}

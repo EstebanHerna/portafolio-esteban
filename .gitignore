@@ -1,0 +1,52 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# testing
+/coverage
+/playwright-report
+/test-results
+
+# env - NUNCA commitear valores reales
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.production.local
+
+# misc
+.DS_Store
+*.pem
+.vercel
+*.tsbuildinfo
+
+# editor
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# artefactos de build/log locales
+/build.log
+*.log
+
+# ==============================================================================
+# Documentacion de planeacion / andamiaje interno. NO va al repo publico.
+# Son documentos de trabajo (specs de Kiro, comandos de Claude, doc de diseno
+# de planeacion). El repo publico contiene solo el codigo y su README/SECURITY.
+# ==============================================================================
+.kiro/
+.claude/
+/design.md
+
+# Certificados personales en PDF (datos ya extraidos a src/lib/data/certifications.ts).
+# No se versionan: son documentos personales y pesan de mas en el repo.
+*.pdf
