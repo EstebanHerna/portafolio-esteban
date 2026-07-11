@@ -1,6 +1,6 @@
 import type { Certification } from '@/lib/types';
 
-/** Certificaciones verificadas de los PDF entregados. La de Google tiene fecha por confirmar. */
+/** Certificaciones verificadas (PDF de Codigo Facilito y badge de Google Cloud). */
 export const certifications: Certification[] = [
   {
     name: 'Curso a fondo de GitHub',
@@ -31,8 +31,8 @@ export const certifications: Certification[] = [
     code: 'a1361327-ff1a-4235-8c27-f3a36430b470',
   },
   {
-    name: 'Introduction to Generative AI',
-    issuer: 'Google (Google Cloud Skills Boost)',
-    date: null,
+    name: 'Prompt Design in Vertex AI (Skill Badge)',
+    issuer: 'Google Cloud',
+    date: '2026-07-08',
   },
 ];

@@ -50,3 +50,6 @@ next-env.d.ts
 # Certificados personales en PDF (datos ya extraidos a src/lib/data/certifications.ts).
 # No se versionan: son documentos personales y pesan de mas en el repo.
 *.pdf
+
+# Copia suelta de la foto en la raiz. La que usa el sitio es /public/esteban.jpg.
+/FOTO_ESTEBAN.jpeg

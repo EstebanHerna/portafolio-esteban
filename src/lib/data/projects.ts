@@ -46,7 +46,7 @@ export const projects: Project[] = [
         role: { es: 'Microbiologia (sub-lider).', en: 'Microbiology (co-lead).' },
       },
     ],
-    repoUrl: null,
+    repoUrl: 'https://github.com/EstebanHerna/bacterioscope',
   },
   {
     slug: 'hemovision',
@@ -134,7 +134,7 @@ export const projects: Project[] = [
       es: 'Proyecto de competencia cerrado. Sirve como evidencia de arquitectura cloud serverless e IA generativa aplicada.',
       en: 'Closed competition project. It stands as evidence of serverless cloud architecture and applied generative AI.',
     },
-    repoUrl: null,
+    repoUrl: 'https://github.com/EstebanHerna/Aws_idea',
   },
   {
     slug: 'altus',
@@ -164,10 +164,10 @@ export const projects: Project[] = [
       en: 'Built and finished by Esteban as creator. Technical detail will be added once Esteban provides it.',
     },
     pending: {
-      es: 'Documentacion tecnica del proyecto (stack, funcionalidad, enlace al repositorio si aplica).',
-      en: 'Project technical documentation (stack, features, repository link if applicable).',
+      es: 'Documentacion tecnica del proyecto (stack y funcionalidad).',
+      en: 'Project technical documentation (stack and features).',
     },
-    repoUrl: null,
+    repoUrl: 'https://github.com/EstebanHerna/altusmaintain',
   },
 ];
 
