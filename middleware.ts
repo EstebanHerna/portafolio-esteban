@@ -35,6 +35,8 @@ function applySecurityHeaders(headers: Headers, csp: string) {
   headers.set('Referrer-Policy', 'no-referrer');
   headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), browsing-topics=()');
   headers.set('X-DNS-Prefetch-Control', 'off');
+  headers.set('Cross-Origin-Opener-Policy', 'same-origin');
+  headers.set('X-Permitted-Cross-Domain-Policies', 'none');
 }
 
 export default function middleware(request: NextRequest) {

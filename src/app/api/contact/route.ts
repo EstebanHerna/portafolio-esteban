@@ -6,12 +6,37 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 function clientIp(request: NextRequest): string {
+  // En Vercel, x-real-ip es el IP real de confianza. x-forwarded-for[0] lo puede
+  // falsear el cliente, asi que solo se usa como respaldo (evita evadir el rate limit).
+  const real = request.headers.get('x-real-ip');
+  if (real) return real.trim();
   const fwd = request.headers.get('x-forwarded-for');
   if (fwd) return fwd.split(',')[0]!.trim();
-  return request.headers.get('x-real-ip') ?? '127.0.0.1';
+  return '127.0.0.1';
+}
+
+/** El Origin de un POST de navegador legitimo coincide con el host del sitio. */
+function isSameOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get('origin');
+  if (!origin) return true; // Sin Origin (no-navegador): lo cubren honeypot + rate limit + validacion.
+  try {
+    return new URL(origin).host === request.headers.get('host');
+  } catch {
+    return false;
+  }
 }
 
 export async function POST(request: NextRequest) {
+  // Bloquea envios cross-site (CSRF): si el Origin no es el propio sitio, se rechaza.
+  if (!isSameOrigin(request)) {
+    return NextResponse.json({ ok: false, error: 'forbidden' }, { status: 403 });
+  }
+
+  // Rechaza cuerpos desproporcionados antes de parsear (el mensaje maximo es 4000 chars).
+  if (Number(request.headers.get('content-length') ?? '0') > 16_000) {
+    return NextResponse.json({ ok: false, error: 'too_large' }, { status: 413 });
+  }
+
   let body: unknown;
   try {
     body = await request.json();

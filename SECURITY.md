@@ -11,7 +11,8 @@ Si encuentras una vulnerabilidad, escribe a **ea.hernandezs1@uniandes.edu.co** (
 
 ## Controles implementados
 
-- **Cabeceras de seguridad** en cada respuesta via `middleware.ts` (Edge): `Content-Security-Policy` con nonce por request, `Strict-Transport-Security` con `preload`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Permissions-Policy` restrictiva (sin camara, microfono ni geolocalizacion).
+- **Cabeceras de seguridad** en cada respuesta via `middleware.ts` (Edge): `Content-Security-Policy` con nonce por request, `Strict-Transport-Security` con `preload`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Permissions-Policy` restrictiva (sin camara, microfono ni geolocalizacion), `Cross-Origin-Opener-Policy: same-origin` y `X-Permitted-Cross-Domain-Policies: none`.
+- **Rechazo de envios cross-site (CSRF)** en `/api/contact`: si el header `Origin` no coincide con el host del sitio, la peticion se rechaza con 403. Ademas se limita el tamano del cuerpo (413 si excede el maximo esperado) antes de parsearlo, y el rate limiting usa el IP real de confianza (`x-real-ip`), no el `x-forwarded-for` manipulable.
 - **CSP con nonce**: el nonce se genera por request en el middleware y se propaga por las cabeceras de la request para que Next firme sus scripts. Por esto, el documento se renderiza de forma dinamica por request; el contenido de datos sigue siendo estatico y auditable en git. Es un intercambio deliberado: se prioriza una CSP fuerte sobre el SSG puro del documento.
 - **Rate limiting** en `/api/contact`: 5 envios por 10 minutos por IP, respaldado por Upstash Redis (`src/lib/rate-limit.ts`). Sin backend configurado en produccion, la ruta responde 503 controlado, nunca un error crudo.
 - **Honeypot** invisible en el formulario: los envios con el campo trampa lleno se aceptan en silencio y se descartan.

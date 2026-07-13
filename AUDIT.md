@@ -53,7 +53,8 @@ el de CI/Vercel (Linux) coinciden en verde.
 
 Definidas en `middleware.ts` para cada respuesta: CSP con nonce por request, HSTS
 con `preload`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
-`Referrer-Policy: no-referrer` y `Permissions-Policy` restrictiva.
+`Referrer-Policy: no-referrer`, `Permissions-Policy` restrictiva,
+`Cross-Origin-Opener-Policy: same-origin` y `X-Permitted-Cross-Domain-Policies: none`.
 
 > Pendiente: verificacion en runtime contra la URL desplegada (p. ej.
 > securityheaders.com o `curl -I`). Solo puede correrse cuando el sitio este en
@@ -72,9 +73,12 @@ con `preload`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
 
 ## 6. Formulario de contacto
 
-- `/api/contact` valida y sanea la entrada con Zod, aplica rate limiting (5/10 min
-  por IP, Upstash) y honeypot. Sin backend configurado, responde **503 controlado**,
-  nunca un error crudo (`src/lib/rate-limit.ts`).
+- `/api/contact` valida y sanea la entrada con Zod (limites de longitud por campo),
+  aplica rate limiting (5/10 min por IP real de confianza) y honeypot. Sin backend
+  configurado, responde **503 controlado**, nunca un error crudo.
+- **Superficie de entrada blindada**: rechaza POST cross-site por `Origin` (403),
+  cuerpos desproporcionados por `Content-Length` (413) y JSON invalido (400). El
+  rate limit usa `x-real-ip` (no el `x-forwarded-for` manipulable por el cliente).
 - **Pendiente**: el envio real del correo (integrar Resend u otro proveedor) no
   esta conectado todavia; hoy la ruta valida/limita pero no despacha el mensaje.
 
