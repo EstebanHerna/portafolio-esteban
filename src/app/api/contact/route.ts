@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getRateLimiter } from '@/lib/rate-limit';
 import { ContactSchema } from '@/lib/contact-schema';
+import { getEmailConfig, sendContactEmail } from '@/lib/email';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -65,14 +66,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: 'unavailable' }, { status: 503 });
   }
 
-  // El envio real de correo se conecta aqui (Resend u otro) usando variables del
-  // panel de Vercel. El destino real NUNCA se expone al cliente.
-  // Ejemplo (a implementar con la key en produccion):
-  //   await sendEmail({ to: process.env.CONTACT_TO_EMAIL, ...parsed.data });
-  const configured = Boolean(process.env.CONTACT_EMAIL_PROVIDER_API_KEY);
-  if (!configured && process.env.NODE_ENV === 'production') {
-    // Aceptar el mensaje pero registrar que falta el proveedor, sin filtrar detalles.
-    console.warn('[contact] proveedor de email no configurado; mensaje no entregado');
+  // Envio real via Resend. Las credenciales viven solo en el entorno (Vercel).
+  const emailConfig = getEmailConfig();
+  if (emailConfig) {
+    const delivered = await sendContactEmail(emailConfig, parsed.data);
+    if (!delivered) {
+      // Fallo del proveedor: no se filtran detalles al cliente.
+      return NextResponse.json({ ok: false, error: 'send_failed' }, { status: 502 });
+    }
+  } else if (process.env.NODE_ENV === 'production') {
+    // Sin proveedor configurado en produccion: no fingir exito.
+    return NextResponse.json({ ok: false, error: 'unavailable' }, { status: 503 });
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
