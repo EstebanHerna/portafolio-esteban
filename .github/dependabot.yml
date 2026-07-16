@@ -5,9 +5,15 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # Solo minor/patch agrupados. Los saltos de version MAYOR (Next 16, Tailwind 4,
+    # etc.) rompen el build y se evaluan a mano, no por PR automatico.
     groups:
       all-dependencies:
         patterns: ['*']
+        update-types: ['minor', 'patch']
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   - package-ecosystem: github-actions
     directory: '/'
     schedule:
