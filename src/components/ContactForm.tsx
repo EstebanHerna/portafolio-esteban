@@ -116,7 +116,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={status === 'sending'}
-            className="border border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-bone transition-colors hover:border-agar-deep hover:bg-agar-deep disabled:opacity-60"
+            className="pressable border border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-bone hover:border-agar-deep hover:bg-agar-deep disabled:opacity-60"
           >
             {status === 'sending' ? t('sending') : t('send')}
           </button>

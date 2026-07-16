@@ -110,7 +110,7 @@ export function ProcessDiagram() {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setOpen(isOpen ? null : node.id)}
-                      className="flex w-full items-start justify-between gap-3 px-4 py-3 text-left"
+                      className="pressable flex w-full items-start justify-between gap-3 px-4 py-3 text-left hover:bg-bone-deep/60"
                     >
                       <span>
                         <span className="block font-mono text-xs text-agar-deep">

@@ -7,6 +7,9 @@
     --bg: 244 240 230; /* bone */
     --fg: 26 23 18; /* ink */
     --accent: 184 134 47; /* agar */
+    /* Curvas con caracter: mas fuertes que las nativas de CSS. */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   html {
@@ -71,11 +74,33 @@
   }
 
   .link-underline {
-    @apply relative font-medium text-ink underline decoration-agar decoration-2 underline-offset-4 transition-colors hover:text-agar-deep;
+    @apply relative font-medium text-ink underline decoration-agar decoration-2 underline-offset-4 transition-colors duration-200 hover:text-agar-deep;
+    transition-timing-function: var(--ease-out);
   }
 
   .data-chip {
     @apply inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-xs text-ink-soft;
+  }
+
+  /*
+   * Superficie presionable: transiciones especificas (nunca "all") con curva
+   * propia y feedback tactil al presionar. Bajo reduced-motion se quita el
+   * desplazamiento pero se conservan color y fondo.
+   */
+  .pressable {
+    transition:
+      transform 160ms var(--ease-out),
+      color 180ms var(--ease-out),
+      background-color 180ms var(--ease-out),
+      border-color 180ms var(--ease-out);
+  }
+  .pressable:active {
+    transform: scale(0.97);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pressable:active {
+      transform: none;
+    }
   }
 
   .prose-editorial p {

@@ -69,8 +69,8 @@ export function Explorer({ documents }: { documents: SearchDoc[] }) {
               onClick={() => setFilter(f)}
               className={
                 active
-                  ? 'border border-agar bg-agar/10 px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-agar-deep'
-                  : 'border border-line px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-muted transition-colors hover:border-ink hover:text-ink'
+                  ? 'pressable border border-agar bg-agar/10 px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-agar-deep'
+                  : 'pressable border border-line px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-muted hover:border-ink hover:text-ink'
               }
             >
               {t(`type_${f}`)}

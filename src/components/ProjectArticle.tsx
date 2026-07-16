@@ -16,9 +16,13 @@ export async function ProjectArticle({ slug, locale }: { slug: string; locale: L
       <aside className="col-span-4 md:col-span-3">
         <Link
           href="/proyectos"
-          className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted transition-colors hover:text-ink"
+          className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted transition-colors duration-200 hover:text-ink"
         >
-          <ArrowLeft size={14} /> {t('backToProjects')}
+          <ArrowLeft
+            size={14}
+            className="transition-transform duration-200 ease-out group-hover:-translate-x-0.5"
+          />{' '}
+          {t('backToProjects')}
         </Link>
 
         <dl className="mt-8 space-y-5 border-t border-line pt-6 md:sticky md:top-24">
@@ -59,9 +63,13 @@ export async function ProjectArticle({ slug, locale }: { slug: string; locale: L
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-agar hover:text-agar-deep"
+                className="pressable group inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink hover:border-agar hover:text-agar-deep"
               >
-                {t('viewRepo')} <ArrowUpRight size={14} />
+                {t('viewRepo')}{' '}
+                <ArrowUpRight
+                  size={14}
+                  className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
               </a>
             ) : (
               <span className="inline-flex items-center gap-2 border border-line px-4 py-2 font-mono text-xs uppercase tracking-wider text-muted">

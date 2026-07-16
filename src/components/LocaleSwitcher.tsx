@@ -40,7 +40,7 @@ export function LocaleSwitcher() {
               className={
                 active
                   ? 'uppercase text-agar-deep'
-                  : 'uppercase text-muted underline decoration-line underline-offset-4 transition-colors hover:text-ink'
+                  : 'pressable uppercase text-muted underline decoration-line underline-offset-4 hover:text-ink'
               }
             >
               {loc}

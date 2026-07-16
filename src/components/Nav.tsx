@@ -65,7 +65,7 @@ export function Nav() {
             aria-controls="mobile-menu"
             aria-label={t('toggleMenu')}
             onClick={() => setOpen((v) => !v)}
-            className="text-ink"
+            className="pressable text-ink hover:text-agar-deep"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>

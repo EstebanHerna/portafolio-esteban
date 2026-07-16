@@ -29,13 +29,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/proyectos"
-                className="inline-flex items-center gap-2 border border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-bone transition-colors hover:border-agar-deep hover:bg-agar-deep"
+                className="pressable group inline-flex items-center gap-2 border border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-bone hover:border-agar-deep hover:bg-agar-deep"
               >
-                {t('ctaProjects')} <ArrowRight size={15} />
+                {t('ctaProjects')}{' '}
+                <ArrowRight
+                  size={15}
+                  className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                />
               </Link>
               <Link
                 href="/proceso"
-                className="inline-flex items-center gap-2 border border-line px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-agar"
+                className="pressable inline-flex items-center gap-2 border border-line px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-ink hover:border-agar hover:text-agar-deep"
               >
                 {t('ctaProcess')}
               </Link>
@@ -78,8 +82,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   </div>
                   <h3 className="mt-5 font-serif text-2xl text-ink">{p.name}</h3>
                   <p className="mt-3 flex-1 text-ink-soft">{p.tagline[locale]}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors group-hover:text-agar-deep">
-                    {tp('sectionBuilt')} <ArrowRight size={14} />
+                  <span className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors duration-200 group-hover:text-agar-deep">
+                    {tp('sectionBuilt')}{' '}
+                    <ArrowRight
+                      size={14}
+                      className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                    />
                   </span>
                 </Link>
               </ScrollReveal>
