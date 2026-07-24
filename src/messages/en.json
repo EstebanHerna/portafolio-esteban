@@ -1,8 +1,8 @@
 {
   "meta": {
     "siteName": "Esteban Hernandez",
-    "defaultTitle": "Esteban Hernandez - Systems engineering and clinical microbiology",
-    "defaultDescription": "Systems engineer building production-grade software for real problems in clinical microbiology."
+    "defaultTitle": "Esteban Hernandez - Systems engineering, machine learning and AI",
+    "defaultDescription": "Systems and computing engineer (Uniandes) building software products with machine learning and artificial intelligence: health and biomedicine, mobile, cloud, and robotics."
   },
   "nav": {
     "home": "Home",
@@ -25,7 +25,11 @@
     "processTitle": "How I build with AI",
     "processSubtitle": "Four verifiable stages, not a decorative animation.",
     "processCta": "Walk through the process",
-    "turbidityCaption": "Turbidity curve of a blood culture. The same signal HemoVision analyzes."
+    "turbidityCaption": "Turbidity curve of a blood culture. The same signal HemoVision analyzes.",
+    "curveAria": "Turbidity growth curve of a blood culture with its detection threshold",
+    "curveThreshold": "detection threshold",
+    "curveAxisY": "turbidity",
+    "curveAxisX": "time"
   },
   "projects": {
     "title": "Projects",

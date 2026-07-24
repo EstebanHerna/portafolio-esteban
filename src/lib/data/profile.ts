@@ -22,12 +22,12 @@ export const profile: Profile = {
   name: 'Esteban Alejandro Hernandez Sulvara',
   shortName: 'Esteban Hernandez',
   headline: {
-    es: 'Ingeniero de sistemas que construye software de nivel produccion para problemas reales de microbiologia clinica.',
-    en: 'Systems engineer building production-grade software for real problems in clinical microbiology.',
+    es: 'Ingeniero de sistemas y computacion que construye productos de software con machine learning e inteligencia artificial como base.',
+    en: 'Systems and computing engineer building software products grounded in machine learning and artificial intelligence.',
   },
   positioning: {
-    es: 'Construyo software de nivel produccion para problemas reales de microbiologia clinica, con los mismos tests, CI y controles de seguridad que exigiria a un sistema critico. Me importa distinguir lo que esta validado de lo que todavia es una promesa.',
-    en: "I build production-grade software for real problems in clinical microbiology, with the same tests, CI, and security controls I'd demand of a critical system. I care about telling what's validated apart from what's still a promise.",
+    es: 'Construyo productos de nivel produccion en dominios distintos: salud y biomedicina, movil, cloud y robotica, apoyado en machine learning e inteligencia artificial. Aplico los mismos tests, CI y controles de seguridad que exigiria a un sistema critico, y me importa distinguir lo que esta validado de lo que todavia es una promesa.',
+    en: "I build production-grade products across domains: health and biomedicine, mobile, cloud, and robotics, grounded in machine learning and artificial intelligence. I apply the same tests, CI, and security controls I'd demand of a critical system, and I care about telling what's validated apart from what's still a promise.",
   },
   academic: {
     es: 'Ingenieria de Sistemas y Computacion, Universidad de los Andes (Bogota). 8vo semestre, GPA aproximado 3.9/4.0. Graduacion esperada 2027.',

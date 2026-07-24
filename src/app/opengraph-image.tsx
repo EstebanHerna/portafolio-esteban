@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Esteban Hernandez - Ingenieria de sistemas y microbiologia clinica';
+export const alt = 'Esteban Hernandez - Ingenieria de sistemas, machine learning e IA';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -26,8 +26,18 @@ export default function OgImage() {
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontSize: 62, lineHeight: 1.1, maxWidth: 980 }}>
-          Software de nivel produccion para problemas reales de microbiologia clinica.
+        <div style={{ fontSize: 58, lineHeight: 1.12, maxWidth: 1000 }}>
+          Productos de software con machine learning e inteligencia artificial.
+        </div>
+        <div
+          style={{
+            fontSize: 26,
+            color: '#6B6355',
+            fontFamily: 'monospace',
+            marginTop: 22,
+          }}
+        >
+          Salud y biomedicina - Movil - Cloud - Robotica
         </div>
       </div>
       <div

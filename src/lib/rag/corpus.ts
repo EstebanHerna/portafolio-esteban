@@ -68,7 +68,8 @@ export function buildCorpus(locale: Locale): SearchDoc[] {
         type: 'stack',
         title: item,
         subtitle: group.label[locale],
-        tags: [group.label[locale]],
+        // El grupo ya se muestra como subtitulo; repetirlo como etiqueta seria ruido.
+        tags: [],
         href: '/sobre-mi',
         text: [item, group.label[locale], group.label.en].join(' '),
       });
@@ -81,7 +82,8 @@ export function buildCorpus(locale: Locale): SearchDoc[] {
       type: 'cert',
       title: c.name,
       subtitle: c.issuer,
-      tags: [c.issuer, ...(c.date ? [c.date.slice(0, 4)] : [])],
+      // El emisor ya va como subtitulo; solo se etiqueta el ano.
+      tags: c.date ? [c.date.slice(0, 4)] : [],
       href: '/sobre-mi',
       text: [c.name, c.issuer].join(' '),
     });

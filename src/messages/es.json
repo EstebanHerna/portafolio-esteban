@@ -1,8 +1,8 @@
 {
   "meta": {
     "siteName": "Esteban Hernandez",
-    "defaultTitle": "Esteban Hernandez - Ingenieria de sistemas y microbiologia clinica",
-    "defaultDescription": "Ingeniero de sistemas que construye software de nivel produccion para problemas reales de microbiologia clinica."
+    "defaultTitle": "Esteban Hernandez - Ingenieria de sistemas, machine learning e IA",
+    "defaultDescription": "Ingeniero de sistemas y computacion (Uniandes) que construye productos de software con machine learning e inteligencia artificial: salud y biomedicina, movil, cloud y robotica."
   },
   "nav": {
     "home": "Inicio",
@@ -25,7 +25,11 @@
     "processTitle": "Como construyo con IA",
     "processSubtitle": "Cuatro etapas verificables, no una animacion decorativa.",
     "processCta": "Recorrer el proceso",
-    "turbidityCaption": "Curva de turbidez de un hemocultivo. La misma senal que analiza HemoVision."
+    "turbidityCaption": "Curva de turbidez de un hemocultivo. La misma senal que analiza HemoVision.",
+    "curveAria": "Curva de crecimiento de turbidez de un hemocultivo con su umbral de deteccion",
+    "curveThreshold": "umbral de deteccion",
+    "curveAxisY": "turbidez",
+    "curveAxisX": "tiempo"
   },
   "projects": {
     "title": "Proyectos",

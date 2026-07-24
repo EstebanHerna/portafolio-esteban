@@ -1,6 +1,6 @@
 # Portafolio - Esteban Alejandro Hernandez Sulvara
 
-Portafolio profesional bilingue (ES/EN). Ingeniero de sistemas que construye software de nivel produccion para problemas reales de microbiologia clinica, con el rigor que aplicaria a un sistema critico.
+Portafolio profesional bilingue (ES/EN). Ingeniero de sistemas y computacion (Uniandes) que construye productos de software con machine learning e inteligencia artificial —salud y biomedicina, movil, cloud y robotica— con el rigor que aplicaria a un sistema critico.
 
 ## Stack
 
