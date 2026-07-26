@@ -23,10 +23,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <h1 className="mt-5 font-serif text-[2.1rem] leading-[1.08] text-ink md:text-[3.1rem]">
               {profile.headline[locale]}
             </h1>
-            <p className="prose-editorial mt-6">
+            <p className="prose-editorial mt-6 animate-reveal-up [animation-delay:120ms]">
               <span className="text-ink-soft">{profile.positioning[locale]}</span>
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex animate-reveal-up flex-wrap gap-3 [animation-delay:240ms]">
               <Link
                 href="/proyectos"
                 className="pressable group inline-flex items-center gap-2 border border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-bone hover:border-agar-deep hover:bg-agar-deep"

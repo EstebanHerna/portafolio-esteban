@@ -71,7 +71,8 @@
   },
   "timeline": {
     "title": "Timeline",
-    "subtitle": "The last few years in order, told as progress."
+    "subtitle": "The last few years in order, told as progress.",
+    "viewRepo": "View repository"
   },
   "about": {
     "title": "About",
@@ -84,7 +85,8 @@
     "certDate": "Date",
     "certDatePending": "To confirm",
     "certDuration": "Duration",
-    "certCode": "Code"
+    "certCode": "Code",
+    "certVerify": "View certificate"
   },
   "contact": {
     "title": "Contact",

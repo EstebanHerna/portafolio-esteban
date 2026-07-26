@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { profile } from '@/lib/data/profile';
@@ -88,39 +89,64 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </dl>
         </div>
 
-        {/* Certificaciones */}
+        {/* Certificaciones: cada credencial verificable enlaza a su pagina publica. */}
         <div className="mt-12">
           <h2 className="lab-rule font-serif text-2xl text-ink">{t('certsTitle')}</h2>
           <ul className="mt-6 divide-y divide-line border-y border-line">
-            {certifications.map((cert) => (
-              <li key={cert.name} className="grid gap-1 py-4 md:grid-cols-12 md:gap-4">
-                <div className="md:col-span-7">
-                  <p className="font-serif text-lg text-ink">{cert.name}</p>
-                  <p className="text-sm text-muted">{cert.issuer}</p>
-                </div>
-                <div className="md:col-span-5 md:text-right">
-                  <p className="font-mono text-xs text-ink-soft">
-                    {t('certDate')}:{' '}
-                    {cert.date
-                      ? new Date(cert.date).toLocaleDateString(
-                          locale === 'es' ? 'es-CO' : 'en-US',
-                          {
-                            year: 'numeric',
-                            month: 'short',
-                            day: '2-digit',
-                          },
-                        )
-                      : t('certDatePending')}
-                    {cert.duration ? ` - ${cert.duration}` : ''}
-                  </p>
-                  {cert.code && (
-                    <p className="mt-0.5 break-all font-mono text-[0.62rem] text-muted">
-                      {t('certCode')}: {cert.code}
+            {certifications.map((cert, i) => {
+              const dateLabel = cert.date
+                ? new Date(cert.date).toLocaleDateString(locale === 'es' ? 'es-CO' : 'en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: '2-digit',
+                  })
+                : t('certDatePending');
+
+              const inner = (
+                <>
+                  <div className="md:col-span-7">
+                    <p className="font-serif text-lg text-ink transition-colors duration-200 group-hover:text-agar-deep">
+                      {cert.name}
                     </p>
+                    <p className="text-sm text-muted">{cert.issuer}</p>
+                  </div>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 md:col-span-5 md:mt-0 md:justify-end">
+                    <span className="font-mono text-xs text-ink-soft">
+                      {dateLabel}
+                      {cert.duration ? ` - ${cert.duration}` : ''}
+                    </span>
+                    {cert.verifyUrl && (
+                      <span className="inline-flex items-center gap-1 font-mono text-[0.68rem] uppercase tracking-wider text-muted transition-colors duration-200 group-hover:text-agar-deep">
+                        {t('certVerify')}
+                        <ArrowUpRight
+                          size={13}
+                          className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        />
+                      </span>
+                    )}
+                  </div>
+                </>
+              );
+
+              return (
+                <ScrollReveal as="li" key={cert.name} delay={i * 0.04}>
+                  {cert.verifyUrl ? (
+                    <a
+                      href={cert.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group grid gap-1 py-4 transition-colors hover:bg-bone-deep/40 md:grid-cols-12 md:items-center md:gap-4"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <div className="grid gap-1 py-4 md:grid-cols-12 md:items-center md:gap-4">
+                      {inner}
+                    </div>
                   )}
-                </div>
-              </li>
-            ))}
+                </ScrollReveal>
+              );
+            })}
           </ul>
         </div>
       </div>

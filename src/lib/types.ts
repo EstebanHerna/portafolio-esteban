@@ -63,6 +63,8 @@ export interface TimelineEntry {
   title: Localized;
   detail: Localized;
   tag: Localized;
+  /** Repositorio publico asociado, si existe. */
+  repoUrl?: string;
 }
 
 export interface Certification {
@@ -71,6 +73,8 @@ export interface Certification {
   date: string | null;
   duration?: string;
   code?: string;
+  /** URL publica de verificacion; si existe, la credencial se vuelve un enlace. */
+  verifyUrl?: string;
 }
 
 export interface StackGroup {

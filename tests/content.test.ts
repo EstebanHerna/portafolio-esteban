@@ -22,9 +22,11 @@ describe('reglas de contenido no negociables', () => {
     expect(names).toEqual(['Paula Becerra']);
   });
 
-  it('Altus no inventa stack', () => {
+  it('Altus documenta stack real y mantiene el disclaimer de honestidad (proyeccion vs realizado)', () => {
     const altus = getProject('altus');
-    expect(altus?.stack).toHaveLength(0);
+    expect(altus?.stack.length).toBeGreaterThan(0);
+    expect(altus?.disclaimer).toBeDefined();
+    expect(altus?.disclaimer?.es).toMatch(/proyecciones/i);
   });
 
   it('cada proyecto tiene contenido bilingue en los campos clave', () => {

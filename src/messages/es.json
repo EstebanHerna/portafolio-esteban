@@ -71,7 +71,8 @@
   },
   "timeline": {
     "title": "Trayectoria",
-    "subtitle": "Los ultimos anos en orden, contados como progreso."
+    "subtitle": "Los ultimos anos en orden, contados como progreso.",
+    "viewRepo": "Ver repositorio"
   },
   "about": {
     "title": "Sobre mi",
@@ -84,7 +85,8 @@
     "certDate": "Fecha",
     "certDatePending": "Por confirmar",
     "certDuration": "Duracion",
-    "certCode": "Codigo"
+    "certCode": "Codigo",
+    "certVerify": "Ver certificado"
   },
   "contact": {
     "title": "Contacto",

@@ -48,8 +48,8 @@ export const timeline: TimelineEntry[] = [
     tag: { es: 'Comunidad', en: 'Community' },
     title: { es: 'Miembro activo de SinfonIA Uniandes', en: 'Active member of SinfonIA Uniandes' },
     detail: {
-      es: 'Lectura de papers, proyectos de Machine Learning y talleres de robotica, NLP y vision computacional.',
-      en: 'Paper reading, Machine Learning projects, and robotics, NLP, and computer-vision workshops.',
+      es: 'Comunidad de IA de Uniandes (hibrido). Colaboro en sesiones tecnicas y lectura de papers sobre IA aplicada, aportando a proyectos de Machine Learning con enfoque en impacto real, y participo en talleres internos de robotica, NLP y vision computacional.',
+      en: 'Uniandes AI community (hybrid). I collaborate in technical sessions and paper reading on applied AI, contributing to Machine Learning projects focused on real impact, and take part in internal robotics, NLP, and computer-vision workshops.',
     },
   },
   {
@@ -61,6 +61,7 @@ export const timeline: TimelineEntry[] = [
       es: 'App web de accesibilidad visual con deteccion de obstaculos en tiempo real y guia por voz. 24h Hackathon Young AI Leaders Bogota, tema "AI for Good", entre +100 participantes y 20 equipos.',
       en: 'Visual-accessibility web app with real-time obstacle detection and voice guidance. 24h Young AI Leaders Bogota hackathon, "AI for Good" theme, among 100+ participants and 20 teams.',
     },
+    repoUrl: 'https://github.com/EstebanHerna/CAMIN_AI',
   },
   {
     date: 'Dic. 2024 - Abr. 2025',
@@ -78,9 +79,10 @@ export const timeline: TimelineEntry[] = [
     tag: { es: 'Movil', en: 'Mobile' },
     title: { es: 'UniMarket (ISIS-3510)', en: 'UniMarket (ISIS-3510)' },
     detail: {
-      es: 'App Android con MVVM, mensajeria en tiempo real y deteccion de campus por formula de Haversine (radio 600 m); backend NestJS y JWT por Interceptor.',
-      en: 'Android app with MVVM, real-time messaging, and campus detection via the Haversine formula (600 m radius); NestJS backend and JWT via Interceptor.',
+      es: 'Marketplace Android para campus. Construi la mensajeria en tiempo real y el modulo LocationHelper (presencia en campus por formula de Haversine, radio 600 m); implemente AnalyticsLogger y la metrica BQ4 (tiempo promedio de respuesta del vendedor) sobre backend NestJS; autenticacion JWT por patron Interceptor y estado reactivo con StateFlow en Jetpack Compose.',
+      en: 'Android campus marketplace. I built the real-time messaging and the LocationHelper module (on-campus presence via the Haversine formula, 600 m radius); implemented AnalyticsLogger and the BQ4 metric (average seller response time) over a NestJS backend; JWT auth via the Interceptor pattern and reactive state with StateFlow in Jetpack Compose.',
     },
+    repoUrl: 'https://github.com/ISIS3510-MobileApps-Group42-202610/group-42-general',
   },
   {
     date: 'Mar. 2025 - May. 2025',
@@ -137,6 +139,17 @@ export const timeline: TimelineEntry[] = [
       es: 'Giro de BioPatch a BacterioScope, arranque de HemoVision y propuesta de tesis de Astrid Berena Herrera.',
       en: 'Pivot from BioPatch to BacterioScope, start of HemoVision, and Astrid Berena Herrera thesis proposal.',
     },
+  },
+  {
+    date: 'Abr. 2026 - presente',
+    sortKey: 202604,
+    tag: { es: 'Venture', en: 'Venture' },
+    title: { es: 'Altus - cofundador y CTO', en: 'Altus - co-founder and CTO' },
+    detail: {
+      es: 'API de inteligencia crediticia para adultos no bancarizados en LATAM a partir de datos alternativos. MVP desplegado, dos cartas de intencion de piloto y seleccion al Cornell EMC2 Mark Mobius Pitch 2026.',
+      en: 'Credit-intelligence API for unbanked adults in LATAM from alternative data. Deployed MVP, two pilot letters of intent, and selection for the Cornell EMC2 Mark Mobius Pitch 2026.',
+    },
+    repoUrl: 'https://github.com/EstebanHerna/altusmaintain',
   },
   {
     date: '05 Jul. 2026',

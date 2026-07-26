@@ -5,7 +5,7 @@ import type { Project } from '@/lib/types';
  * Reglas fijas:
  *  - BacterioScope: investigacion en curso, nunca producto terminado. Solo Paula Becerra citada.
  *  - HemoVision: disclaimer de datos sinteticos intacto y con el mismo peso que las metricas.
- *  - Altus: sobrio, rol creador, sin inventar stack ni funcionalidad.
+ *  - Altus: venture real; separa lo construido (MVP) de lo proyectado (mercado/finanzas) via disclaimer.
  *  - repoUrl null => no se renderiza boton "ver repositorio".
  */
 export const projects: Project[] = [
@@ -141,33 +141,61 @@ export const projects: Project[] = [
     name: 'Altus',
     order: 4,
     featured: false,
-    timeframe: '2025',
+    timeframe: '2025 - presente',
     status: {
       kind: 'shipped',
-      label: { es: 'Terminado', en: 'Completed' },
+      label: { es: 'MVP desplegado - venture activo', en: 'Deployed MVP - active venture' },
     },
     tagline: {
-      es: 'Proyecto de desarrollo propio, terminado.',
-      en: 'Personal development project, completed.',
+      es: 'API de inteligencia crediticia que da identidad de credito a los adultos no bancarizados de Latinoamerica a partir de datos alternativos.',
+      en: 'Credit-intelligence API that gives a credit identity to unbanked adults in Latin America from alternative data.',
     },
     role: {
-      es: 'Creador.',
-      en: 'Creator.',
+      es: 'Cofundador y CTO: arquitectura, modelos de ML e infraestructura serverless en AWS.',
+      en: 'Co-founder and CTO: architecture, ML models, and serverless AWS infrastructure.',
     },
-    stack: [],
+    stack: ['REST API', 'AWS Lambda', 'Machine Learning', 'Python', 'Node.js'],
     problem: {
-      es: 'Proyecto propio terminado. La descripcion tecnica detallada no se documenta aqui para no inventar alcance ni stack.',
-      en: 'Personal, completed project. The detailed technical description is not documented here to avoid inventing scope or stack.',
+      es: 'Los buros tradicionales exigen historial crediticio previo para generar un score, dejando fuera a unos 160 millones de adultos en LATAM sin historial formal (trabajadores informales, primeros prestatarios). Las fintechs terminan sobre-rechazando clientes solventes o asumiendo perdidas.',
+      en: 'Traditional bureaus require prior credit history to produce a score, excluding roughly 160 million adults in LATAM with no formal history (informal workers, first-time borrowers). Fintechs end up over-rejecting solvent customers or absorbing losses.',
     },
     built: {
-      es: 'Desarrollado y finalizado por Esteban como creador. El detalle tecnico se anadira cuando Esteban lo proporcione.',
-      en: 'Built and finished by Esteban as creator. Technical detail will be added once Esteban provides it.',
+      es: 'MVP de un motor de scoring que consume datos alternativos (movil, servicios, e-commerce, telecom y senales conductuales) y devuelve por API un score, nivel de riesgo, factores explicables y un flag de fraude. Validacion interna sobre ~1,200 perfiles con ~78% de precision frente a un baseline de buro (~61%), y un dataset propietario de ~8,500 perfiles con un laboratorio de investigacion de Uniandes. Arquitectura serverless en AWS Lambda. Dos cartas de intencion (LOI) de piloto y carta de apoyo de iNNpulsa Colombia; seleccionado para el Cornell EMC2 Mark Mobius Pitch 2026.',
+      en: 'MVP of a scoring engine that ingests alternative data (mobile, utilities, e-commerce, telecom, and behavioral signals) and returns via API a score, risk level, explainable factors, and a fraud flag. Internal validation on ~1,200 profiles with ~78% accuracy against a bureau baseline (~61%), plus a proprietary dataset of ~8,500 profiles with a Uniandes research lab. Serverless architecture on AWS Lambda. Two pilot letters of intent (LOI) and a support letter from iNNpulsa Colombia; selected for the Cornell EMC2 Mark Mobius Pitch 2026.',
     },
     pending: {
-      es: 'Documentacion tecnica del proyecto (stack y funcionalidad).',
-      en: 'Project technical documentation (stack and features).',
+      es: 'Validacion independiente y en produccion del modelo, con la metodologia y el conjunto de prueba documentados. Cumplimiento de privacidad y habeas data (SIC Colombia) por tratar datos personales y crediticios. Formalizar pilotos y equipo. Las proyecciones de mercado y financieras del pitch son estimaciones, no resultados.',
+      en: 'Independent and production validation of the model, with documented methodology and test set. Privacy and data-protection compliance (SIC Colombia) since it handles personal and credit data. Formalizing pilots and team. The pitch market and financial projections are estimates, not results.',
+    },
+    metrics: [
+      {
+        value: '~1,200',
+        label: { es: 'Perfiles evaluados (MVP)', en: 'Profiles evaluated (MVP)' },
+      },
+      {
+        value: '~78%',
+        label: {
+          es: 'Precision en validacion interna (vs ~61% baseline de buro)',
+          en: 'Accuracy in internal validation (vs ~61% bureau baseline)',
+        },
+      },
+      { value: '2', label: { es: 'Cartas de intencion de piloto', en: 'Pilot letters of intent' } },
+      {
+        value: '~8,500',
+        label: { es: 'Perfiles en dataset propietario', en: 'Profiles in proprietary dataset' },
+      },
+    ],
+    disclaimer: {
+      es: 'Las cifras de traccion (perfiles y ~78%) son resultados de etapa MVP en validacion interna; su base de prueba aun debe documentarse de forma auditable. El tamano de mercado, las proyecciones financieras y ratios como LTV:CAC son proyecciones de pitch, NO resultados realizados. Altus trata datos personales y crediticios, por lo que el cumplimiento de privacidad es un requisito activo, no opcional.',
+      en: 'Traction figures (profiles and ~78%) are MVP-stage internal-validation results; their test basis still needs auditable documentation. Market size, financial projections, and ratios like LTV:CAC are pitch projections, NOT realized results. Altus handles personal and credit data, so privacy compliance is an active requirement, not optional.',
     },
     repoUrl: 'https://github.com/EstebanHerna/altusmaintain',
+    links: [
+      {
+        label: { es: 'Ver el pitch (sitio)', en: 'View the pitch (site)' },
+        href: 'https://altusmaintain.lovable.app/',
+      },
+    ],
   },
 ];
 

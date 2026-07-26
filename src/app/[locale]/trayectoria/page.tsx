@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ArrowUpRight } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { timelineReverse } from '@/lib/data/timeline';
@@ -47,6 +48,20 @@ export default async function TimelinePage({ params }: { params: Promise<{ local
               </div>
               <h2 className="mt-1.5 font-serif text-xl text-ink">{entry.title[locale]}</h2>
               <p className="mt-1.5 max-w-prose text-ink-soft">{entry.detail[locale]}</p>
+              {entry.repoUrl && (
+                <a
+                  href={entry.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-2 inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-muted transition-colors duration-200 hover:text-agar-deep"
+                >
+                  {t('viewRepo')}
+                  <ArrowUpRight
+                    size={13}
+                    className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
+              )}
             </ScrollReveal>
           ))}
         </ol>
