@@ -1,165 +1,199 @@
 import { getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
-import { ArrowLeft, ArrowUpRight, Lock } from 'lucide-react';
-import { getProject } from '@/lib/data/projects';
-import type { Locale } from '@/lib/types';
+import { PipelineDiagram } from '@/components/PipelineDiagram';
+import { projectsByOrder } from '@/lib/data/projects';
+import type { Locale, Project } from '@/lib/types';
 
-export async function ProjectArticle({ slug, locale }: { slug: string; locale: Locale }) {
-  const project = getProject(slug);
-  if (!project) notFound();
+/**
+ * Artículo de proyecto. Orden fijo: problema, lo construido, cifras con su fuente,
+ * aclaración metodológica (mismo peso que las cifras), lo que falta y equipo.
+ * La ficha técnica acompaña a la derecha.
+ */
+export async function ProjectArticle({ project, locale }: { project: Project; locale: Locale }) {
   const t = await getTranslations('projects');
 
-  return (
-    <article className="editorial-grid py-14 md:py-20">
-      {/* Columna de notas al margen */}
-      <aside className="col-span-4 md:col-span-3">
-        <Link
-          href="/proyectos"
-          className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted transition-colors duration-200 hover:text-ink"
-        >
-          <ArrowLeft
-            size={14}
-            className="transition-transform duration-200 ease-out group-hover:-translate-x-0.5"
-          />{' '}
-          {t('backToProjects')}
-        </Link>
+  const index = projectsByOrder.findIndex((p) => p.slug === project.slug);
+  const next = projectsByOrder[(index + 1) % projectsByOrder.length];
 
-        <dl className="mt-8 space-y-5 border-t border-line pt-6 md:sticky md:top-24">
-          <div>
-            <dt className="font-mono text-[0.68rem] uppercase tracking-wider text-muted">
-              {t('status')}
-            </dt>
-            <dd className="mt-1 text-sm text-ink">{project.status.label[locale]}</dd>
-          </div>
-          <div>
-            <dt className="font-mono text-[0.68rem] uppercase tracking-wider text-muted">
-              {t('role')}
-            </dt>
-            <dd className="mt-1 text-sm text-ink">{project.role[locale]}</dd>
-          </div>
-          <div>
-            <dt className="font-mono text-[0.68rem] uppercase tracking-wider text-muted">
-              {project.timeframe}
-            </dt>
-          </div>
-          {project.stack.length > 0 && (
-            <div>
-              <dt className="font-mono text-[0.68rem] uppercase tracking-wider text-muted">
-                {t('sectionStack')}
-              </dt>
-              <dd className="mt-2 flex flex-wrap gap-1.5">
-                {project.stack.map((s) => (
-                  <span key={s} className="data-chip">
-                    {s}
-                  </span>
-                ))}
-              </dd>
+  return (
+    <article className="sheet pb-24 pt-10 md:pt-12">
+      <Link
+        href="/proyectos"
+        className="inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-muted transition-colors hover:text-accent"
+      >
+        <ArrowLeft size={15} aria-hidden="true" /> {t('backToProjects')}
+      </Link>
+
+      <header className="mt-6 max-w-[52rem]">
+        <h1 className="title-page">{project.name[locale]}</h1>
+        <p className="mt-5 text-[1.25rem] leading-snug text-ink">{project.tagline[locale]}</p>
+      </header>
+
+      <div className="mt-12 grid gap-x-14 gap-y-12 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <Section title={t('sectionProblem')} first>
+            {project.problem[locale]}
+          </Section>
+          <Section title={t('sectionBuilt')}>{project.built[locale]}</Section>
+
+          {project.pipeline && <PipelineDiagram pipeline={project.pipeline} locale={locale} />}
+
+          {project.metrics && project.metrics.length > 0 && (
+            <div className="mt-12">
+              <table className="cuadro stack-sm">
+                <caption className="caption pb-2 text-left">
+                  <span className="caption-num">{t('metricsLabel')}</span> {t('metricsTitle')}
+                </caption>
+                <thead className="max-sm:sr-only">
+                  <tr>
+                    <th scope="col">{t('colIndicator')}</th>
+                    <th scope="col" className="text-right">
+                      {t('colValue')}
+                    </th>
+                    <th scope="col" className="w-[40%]">
+                      {t('colNote')}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {project.metrics.map((m) => (
+                    <tr key={m.label.en}>
+                      <th scope="row">{m.label[locale]}</th>
+                      <td className="text-right">
+                        <span className="cifra">{m.value[locale]}</span>
+                      </td>
+                      <td className="text-[0.9375rem] text-muted">{m.note?.[locale]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {project.metricsSource && (
+                <p className="fuente">
+                  <b>{t('source')}</b> {project.metricsSource[locale]}
+                </p>
+              )}
             </div>
           )}
-          <div className="pt-2">
-            {project.repoUrl ? (
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="pressable group inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink hover:border-agar hover:text-agar-deep"
-              >
-                {t('viewRepo')}{' '}
-                <ArrowUpRight
-                  size={14}
-                  className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </a>
-            ) : (
-              <span className="inline-flex items-center gap-2 border border-line px-4 py-2 font-mono text-xs uppercase tracking-wider text-muted">
-                <Lock size={13} /> {t('repoPrivate')}
-              </span>
+
+          {/* Mismo peso visual que las cifras: recuadro completo en tinta, no nota al pie. */}
+          {project.disclaimer && (
+            <aside role="note" className="mt-8 border-2 border-ink bg-tint p-5">
+              <h2 className="font-display text-[1.0625rem] font-bold text-accent [font-stretch:92%]">
+                {t('sectionDisclaimer')}
+              </h2>
+              <p className="mt-2 text-[1.125rem] leading-relaxed text-ink">
+                {project.disclaimer[locale]}
+              </p>
+            </aside>
+          )}
+
+          <Section title={t('sectionPending')}>{project.pending[locale]}</Section>
+
+          {project.collaborators && project.collaborators.length > 0 && (
+            <div className="mt-12">
+              <h2 className="title-section">{t('sectionTeam')}</h2>
+              <ul className="mt-4 space-y-1.5">
+                {project.collaborators.map((c) => (
+                  <li key={c.name}>
+                    <span className="font-semibold text-ink">{c.name}</span>
+                    <span className="text-muted">. {c.role[locale]}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <aside className="md:col-span-5 lg:col-span-4 lg:col-start-9">
+          <div className="md:sticky md:top-8">
+            <h2 className="caption mb-2">{t('sheetTitle')}</h2>
+            <dl className="border-b border-t-2 border-ink">
+              <Row term={t('status')}>{project.status.label[locale]}</Row>
+              <Row term={t('role')}>{project.role[locale]}</Row>
+              <Row term={t('period')}>{project.timeframe[locale]}</Row>
+              {project.stack.length > 0 && <Row term={t('stack')}>{project.stack.join(', ')}</Row>}
+              <Row term={t('repo')} last>
+                {project.repoUrl ? (
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link inline-flex items-center gap-1"
+                  >
+                    {t('viewRepo')} <ArrowUpRight size={15} aria-hidden="true" />
+                  </a>
+                ) : (
+                  t('repoPrivateLong')
+                )}
+              </Row>
+            </dl>
+            {project.links && project.links.length > 0 && (
+              <ul className="mt-4 space-y-1.5">
+                {project.links.map((l) => (
+                  <li key={l.href}>
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link inline-flex items-center gap-1"
+                    >
+                      {l.label[locale]} <ArrowUpRight size={15} aria-hidden="true" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
-        </dl>
-      </aside>
-
-      {/* Cuerpo */}
-      <div className="col-span-4 mt-10 md:col-span-8 md:col-start-5 md:mt-0">
-        <p className="eyebrow">{project.status.label[locale]}</p>
-        <h1 className="mt-3 font-serif text-4xl text-ink md:text-5xl">{project.name}</h1>
-        <p className="prose-editorial mt-5 text-lg">{project.tagline[locale]}</p>
-
-        <Section title={t('sectionProblem')}>{project.problem[locale]}</Section>
-        <Section title={t('sectionBuilt')}>{project.built[locale]}</Section>
-
-        {project.metrics && project.metrics.length > 0 && (
-          <div className="mt-10">
-            <h2 className="lab-rule font-serif text-xl text-ink">{t('sectionMetrics')}</h2>
-            <dl className="mt-5 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
-              {project.metrics.map((m) => (
-                <div key={m.value} className="bg-bone p-4">
-                  <dt className="font-mono text-2xl text-agar-deep">{m.value}</dt>
-                  <dd className="mt-1 text-xs leading-snug text-muted">{m.label[locale]}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        )}
-
-        {/* Disclaimer con el mismo peso visual que las metricas: bloque destacado, no nota al pie. */}
-        {project.disclaimer && (
-          <aside
-            className="mt-8 border-l-4 border-agar bg-bone-deep/60 p-5"
-            role="note"
-            aria-label={t('sectionDisclaimer')}
-          >
-            <p className="font-mono text-[0.68rem] uppercase tracking-wider text-agar-deep">
-              {t('sectionDisclaimer')}
-            </p>
-            <p className="mt-2 text-[1.02rem] leading-relaxed text-ink">
-              {project.disclaimer[locale]}
-            </p>
-          </aside>
-        )}
-
-        <Section title={t('sectionPending')}>{project.pending[locale]}</Section>
-
-        {project.collaborators && project.collaborators.length > 0 && (
-          <div className="mt-10">
-            <h2 className="lab-rule font-serif text-xl text-ink">{t('sectionTeam')}</h2>
-            <ul className="mt-4 space-y-2">
-              {project.collaborators.map((c) => (
-                <li key={c.name} className="flex flex-wrap items-baseline gap-x-3 text-ink-soft">
-                  <span className="font-medium text-ink">{c.name}</span>
-                  <span className="text-sm text-muted">{c.role[locale]}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {project.links && project.links.length > 0 && (
-          <div className="mt-10 flex flex-wrap gap-3 border-t border-line pt-6">
-            {project.links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:text-agar-deep"
-              >
-                {l.label[locale]} <ArrowUpRight size={14} />
-              </a>
-            ))}
-          </div>
-        )}
+        </aside>
       </div>
+
+      {next && next.slug !== project.slug && (
+        <p className="mt-20 border-t-2 border-ink pt-5">
+          <Link
+            href={`/proyectos/${next.slug}`}
+            className="inline-flex flex-wrap items-center gap-x-2 font-display text-[1.375rem] font-bold text-ink transition-colors [font-stretch:104%] hover:text-accent"
+          >
+            {t('next')}: {next.name[locale]} <ArrowRight size={22} aria-hidden="true" />
+          </Link>
+        </p>
+      )}
     </article>
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+  first = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  first?: boolean;
+}) {
   return (
-    <section className="mt-10">
-      <h2 className="lab-rule font-serif text-xl text-ink">{title}</h2>
-      <p className="prose-editorial mt-4">{children}</p>
+    <section className={first ? '' : 'mt-12'}>
+      <h2 className="title-section">{title}</h2>
+      <p className="mt-4 max-w-prose text-[1.125rem] leading-relaxed">{children}</p>
     </section>
+  );
+}
+
+function Row({
+  term,
+  children,
+  last = false,
+}: {
+  term: string;
+  children: React.ReactNode;
+  last?: boolean;
+}) {
+  return (
+    <div className={`grid grid-cols-[7rem_1fr] gap-3 py-3 ${last ? '' : 'border-b border-line'}`}>
+      <dt className="font-display text-[0.9375rem] font-semibold text-ink [font-stretch:88%]">
+        {term}
+      </dt>
+      <dd className="text-[0.9375rem] leading-snug">{children}</dd>
+    </div>
   );
 }

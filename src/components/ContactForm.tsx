@@ -52,9 +52,8 @@ export function ContactForm() {
     }
   }
 
-  const inputCls =
-    'mt-1.5 w-full border border-line bg-bone px-3 py-2.5 font-sans text-ink placeholder:text-muted/70 focus:border-agar';
-  const labelCls = 'block font-mono text-xs uppercase tracking-wider text-ink-soft';
+  const inputCls = 'field mt-1.5';
+  const labelCls = 'block font-display font-semibold text-ink [font-stretch:92%]';
 
   return (
     <form onSubmit={onSubmit} noValidate className="max-w-xl">
@@ -113,17 +112,13 @@ export function ContactForm() {
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            className="pressable border border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-bone hover:border-agar-deep hover:bg-agar-deep disabled:opacity-60"
-          >
+          <button type="submit" disabled={status === 'sending'} className="btn btn-primary">
             {status === 'sending' ? t('sending') : t('send')}
           </button>
 
-          <p aria-live="polite" role="status" className="font-sans text-sm">
-            {status === 'success' && <span className="text-agar-deep">{t('success')}</span>}
-            {status === 'error' && <span className="text-ink-soft">{t(errorKey)}</span>}
+          <p aria-live="polite" role="status" className="text-[0.9375rem]">
+            {status === 'success' && <span className="font-semibold text-ink">{t('success')}</span>}
+            {status === 'error' && <span className="font-semibold text-accent">{t(errorKey)}</span>}
           </p>
         </div>
       </div>

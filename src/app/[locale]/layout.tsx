@@ -3,33 +3,25 @@ import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { Fraunces, IBM_Plex_Mono, Hanken_Grotesk } from 'next/font/google';
+import { Archivo, Source_Sans_3 } from 'next/font/google';
 import { routing, type Locale } from '@/i18n/routing';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { profile } from '@/lib/data/profile';
 import '../globals.css';
 
-const fraunces = Fraunces({
+// Archivo trae eje de ancho (wdth): un solo archivo cubre titulares anchos y
+// cabeceras de cuadro condensadas. Source Sans 3 es la letra de lectura.
+const archivo = Archivo({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-archivo',
   display: 'swap',
-  axes: ['opsz', 'SOFT', 'WONK'],
+  axes: ['wdth'],
 });
 
-const plexMono = IBM_Plex_Mono({
+const sourceSans = Source_Sans_3({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-plex-mono',
-  display: 'swap',
-});
-
-// Mona Sans no esta en Google Fonts. Se usa Hanken Grotesk (sans con caracter,
-// no Inter) en la misma ranura. Para usar Mona Sans real, anadir su .woff2 en
-// /public/fonts y cambiar a next/font/local manteniendo la variable --font-mona-sans.
-const bodySans = Hanken_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-mona-sans',
+  variable: '--font-source-sans',
   display: 'swap',
 });
 
@@ -44,7 +36,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = (await params) as { locale: Locale };
   const t = await getTranslations({ locale, namespace: 'meta' });
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://esteban-hernandez.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portafolio-esteban-mu.vercel.app';
 
   return {
     metadataBase: new URL(siteUrl),
@@ -93,16 +85,13 @@ export default async function LocaleLayout({
   const t = await getTranslations({ locale, namespace: 'nav' });
 
   return (
-    <html
-      lang={locale}
-      className={`${fraunces.variable} ${plexMono.variable} ${bodySans.variable}`}
-    >
+    <html lang={locale} className={`${archivo.variable} ${sourceSans.variable}`}>
       <body>
         {nonce ? <meta name="x-nonce" content={nonce} /> : null}
         <NextIntlClientProvider messages={messages}>
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:border focus:border-ink focus:bg-bone focus:px-4 focus:py-2 focus:font-mono focus:text-xs"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-ink"
           >
             {t('skipToContent')}
           </a>

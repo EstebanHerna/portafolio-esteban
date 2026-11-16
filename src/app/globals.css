@@ -4,17 +4,14 @@
 
 @layer base {
   :root {
-    --bg: 244 240 230; /* bone */
-    --fg: 26 23 18; /* ink */
-    --accent: 184 134 47; /* agar */
-    /* Curvas con caracter: mas fuertes que las nativas de CSS. */
-    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    color-scheme: light;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    scrollbar-color: #56637c #eef2f7;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -31,85 +28,167 @@
   }
 
   body {
-    @apply bg-bone font-sans text-ink antialiased;
-    text-rendering: optimizeLegibility;
+    @apply bg-paper font-sans text-[1.0625rem] leading-relaxed text-ink-soft antialiased;
+    font-variant-numeric: lining-nums;
+    caret-color: #b5122f;
   }
 
   ::selection {
-    background-color: rgb(var(--accent) / 0.28);
-    color: rgb(var(--fg));
+    background-color: #12233f;
+    color: #ffffff;
   }
 
   :focus-visible {
-    outline: 2px solid rgb(var(--accent));
+    outline: 2px solid #b5122f;
     outline-offset: 3px;
-    border-radius: 2px;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-serif tracking-tightish text-ink;
-    font-variation-settings: 'opsz' 40;
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  table {
+    font-variant-numeric: tabular-nums lining-nums;
   }
 }
 
 @layer components {
-  .editorial-grid {
-    @apply mx-auto grid w-full max-w-editorial grid-cols-4 gap-x-6 px-5 md:grid-cols-12 md:px-8;
+  /* Hoja: ancho de lectura del boletín. */
+  .sheet {
+    @apply mx-auto w-full max-w-sheet px-5 md:px-10;
   }
 
-  /* Filete de laboratorio: linea + punto de acento */
-  .lab-rule {
-    @apply relative border-t border-line pt-3;
+  /* Título de página y de sección. Archivo en ancho amplio. */
+  .title-page {
+    @apply font-display text-[2.25rem] font-bold leading-[1.05] tracking-[-0.02em] text-ink md:text-[3.25rem];
+    font-stretch: 108%;
   }
-  .lab-rule::before {
-    content: '';
-    @apply absolute left-0 top-0 h-px w-10 -translate-y-px bg-agar;
-  }
-
-  .eyebrow {
-    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted;
+  .title-section {
+    @apply font-display text-[1.5rem] font-bold leading-tight tracking-[-0.01em] text-ink md:text-[1.875rem];
+    font-stretch: 104%;
   }
 
-  .link-underline {
-    @apply relative font-medium text-ink underline decoration-agar decoration-2 underline-offset-4 transition-colors duration-200 hover:text-agar-deep;
-    transition-timing-function: var(--ease-out);
+  /* Rótulo de cuadro o gráfico: "Cuadro 1." en carmesí y el título en tinta. */
+  .caption {
+    @apply font-display text-[1.0625rem] font-semibold leading-snug text-ink;
+    font-stretch: 92%;
+  }
+  .caption-num {
+    @apply text-accent;
   }
 
-  .data-chip {
-    @apply inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-xs text-ink-soft;
+  /* Cuadro estadístico: filete superior grueso, cabecera en banda, pie con fuente. */
+  .cuadro {
+    @apply w-full border-collapse border-b border-t-2 border-ink text-left;
   }
-
-  /*
-   * Superficie presionable: transiciones especificas (nunca "all") con curva
-   * propia y feedback tactil al presionar. Bajo reduced-motion se quita el
-   * desplazamiento pero se conservan color y fondo.
-   */
-  .pressable {
-    transition:
-      transform 160ms var(--ease-out),
-      color 180ms var(--ease-out),
-      background-color 180ms var(--ease-out),
-      border-color 180ms var(--ease-out);
+  .cuadro caption {
+    caption-side: top;
   }
-  .pressable:active {
-    transform: scale(0.97);
+  .cuadro thead th {
+    @apply border-b border-ink bg-tint px-3 py-2 align-bottom font-display text-[0.9375rem] font-semibold text-ink;
+    font-stretch: 88%;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .pressable:active {
-      transform: none;
+  .cuadro tbody th,
+  .cuadro tbody td {
+    @apply border-b border-line px-3 py-3 align-top;
+  }
+  .cuadro tbody tr:last-child th,
+  .cuadro tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  .cuadro tbody th {
+    @apply font-semibold text-ink;
+  }
+  /* Cuadros apilados: bajo el ancho indicado cada fila se lee como un bloque. */
+  @media (max-width: 639px) {
+    .cuadro.stack-sm tbody tr {
+      @apply block border-b border-line py-3;
+    }
+    .cuadro.stack-sm tbody tr:last-child {
+      @apply border-b-0;
+    }
+    .cuadro.stack-sm tbody th,
+    .cuadro.stack-sm tbody td {
+      @apply block border-0 px-0 py-0.5 text-left;
+    }
+  }
+  @media (max-width: 767px) {
+    .cuadro.stack-md tbody tr {
+      @apply block border-b border-line py-4;
+    }
+    .cuadro.stack-md tbody tr:last-child {
+      @apply border-b-0;
+    }
+    .cuadro.stack-md tbody th,
+    .cuadro.stack-md tbody td {
+      @apply block border-0 px-0 py-0.5 text-left;
     }
   }
 
-  .prose-editorial p {
-    @apply max-w-prose text-[1.05rem] leading-relaxed text-ink-soft;
+  .cifra {
+    @apply whitespace-nowrap font-display text-[1.25rem] font-bold text-ink;
+    font-stretch: 96%;
   }
-}
 
-/* Marca de agua de retícula tipo cuaderno, muy sutil */
-.notebook-lines {
-  background-image: linear-gradient(to bottom, transparent 31px, rgb(216 208 190 / 0.35) 32px);
-  background-size: 100% 32px;
+  /* Pie de cuadro: Fuente y Nota. */
+  .fuente {
+    @apply mt-2 text-[0.9375rem] leading-snug text-muted;
+  }
+  .fuente b {
+    @apply font-semibold text-ink-soft;
+  }
+
+  .link {
+    @apply font-medium text-accent underline decoration-1 underline-offset-[3px];
+    transition: color 160ms var(--ease-out);
+  }
+  .link:hover {
+    @apply text-accent-deep decoration-2;
+  }
+
+  /* Botones. Rectos, sin sombra: son rótulos impresos que se pueden pulsar. */
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2.5 font-display text-[0.9375rem] font-semibold leading-none;
+    font-stretch: 94%;
+    transition:
+      background-color 160ms var(--ease-out),
+      color 160ms var(--ease-out),
+      border-color 160ms var(--ease-out),
+      transform 120ms var(--ease-out);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-primary {
+    @apply border border-accent bg-accent text-white hover:border-accent-deep hover:bg-accent-deep;
+  }
+  .btn-outline {
+    @apply border border-ink text-ink hover:bg-ink hover:text-white;
+  }
+  .btn-cover {
+    @apply border border-white bg-white text-navy hover:border-navy-soft hover:bg-navy-soft;
+  }
+  .btn-cover-outline {
+    @apply border border-navy-soft text-white hover:border-white hover:bg-white hover:text-navy;
+  }
+  .btn[aria-disabled='true'],
+  .btn:disabled {
+    @apply cursor-not-allowed opacity-60;
+  }
+
+  /* Campo de formulario y de búsqueda. */
+  .field {
+    @apply w-full border border-line bg-paper px-3 py-2.5 text-ink placeholder:text-muted;
+    transition: border-color 160ms var(--ease-out);
+  }
+  .field:hover {
+    @apply border-muted;
+  }
+  .field:focus {
+    @apply border-ink;
+  }
 }

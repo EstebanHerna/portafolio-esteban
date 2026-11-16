@@ -20,45 +20,62 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const t = await getTranslations('contact');
 
   return (
-    <section className="editorial-grid py-14 md:py-20">
-      <div className="col-span-4 md:col-span-7">
-        <div className="lab-rule mb-8 max-w-prose">
-          <h1 className="font-serif text-4xl text-ink md:text-5xl">{t('title')}</h1>
-          <p className="mt-3 text-ink-soft">{t('subtitle')}</p>
-        </div>
-        <ContactForm />
-      </div>
+    <section className="sheet pb-24 pt-12 md:pt-16">
+      <h1 className="title-page">{t('title')}</h1>
+      <p className="mt-4 max-w-prose text-[1.125rem]">{t('subtitle')}</p>
+      <p className="mt-3 max-w-prose">{profile.availability[locale]}</p>
 
-      <aside className="col-span-4 mt-12 md:col-span-4 md:col-start-9 md:mt-0">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted">
-          {t('directTitle')}
-        </h2>
-        <ul className="mt-4 space-y-3">
-          <li>
-            <span className="block font-mono text-[0.68rem] uppercase tracking-wider text-muted">
-              {t('emailLabel')}
-            </span>
-            <a href={`mailto:${profile.email}`} className="link-underline break-all">
-              {profile.email}
-            </a>
-          </li>
-          {profile.socials.map((s) => (
-            <li key={s.href}>
-              <span className="block font-mono text-[0.68rem] uppercase tracking-wider text-muted">
-                {s.label}
-              </span>
-              <a
-                href={s.href}
-                target="_blank"
-                rel="me noopener noreferrer"
-                className="link-underline"
-              >
-                {s.href.replace('https://', '')}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </aside>
+      <div className="mt-12 grid gap-x-14 gap-y-12 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <ContactForm />
+        </div>
+
+        <aside className="md:col-span-5 lg:col-span-4 lg:col-start-9">
+          <h2 className="caption mb-2">{t('directTitle')}</h2>
+          <dl className="border-b border-t-2 border-ink">
+            <div className="border-b border-line py-3">
+              <dt className="font-display text-[0.9375rem] font-semibold text-ink [font-stretch:88%]">
+                {t('emailLabel')}
+              </dt>
+              <dd>
+                <a href={`mailto:${profile.email}`} className="link break-all">
+                  {profile.email}
+                </a>
+              </dd>
+            </div>
+            {profile.socials.map((s) => (
+              <div key={s.href} className="border-b border-line py-3">
+                <dt className="font-display text-[0.9375rem] font-semibold text-ink [font-stretch:88%]">
+                  {s.label}
+                </dt>
+                <dd>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    className="link break-all"
+                  >
+                    {s.href.replace('https://', '').replace('www.', '')}
+                  </a>
+                </dd>
+              </div>
+            ))}
+            <div className="py-3">
+              <dt className="font-display text-[0.9375rem] font-semibold text-ink [font-stretch:88%]">
+                {t('cvLabel')}
+              </dt>
+              <dd className="flex flex-col">
+                <a href={profile.cv.es} download className="link w-fit">
+                  {t('cvEs')}
+                </a>
+                <a href={profile.cv.en} download className="link w-fit">
+                  {t('cvEn')}
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
     </section>
   );
 }

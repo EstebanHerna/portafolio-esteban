@@ -32,12 +32,12 @@ export function buildCorpus(locale: Locale): SearchDoc[] {
     docs.push({
       id: `project:${p.slug}`,
       type: 'project',
-      title: p.name,
+      title: p.name[locale],
       subtitle: p.tagline[locale],
       tags: [p.status.label[locale], ...p.stack.slice(0, 4)],
       href: `/proyectos/${p.slug}`,
       text: [
-        p.name,
+        p.name[locale],
         p.tagline[locale],
         p.role[locale],
         p.problem[locale],
@@ -55,9 +55,9 @@ export function buildCorpus(locale: Locale): SearchDoc[] {
       type: 'milestone',
       title: e.title[locale],
       subtitle: e.detail[locale],
-      tags: [e.tag[locale], e.date],
+      tags: [e.tag[locale], e.date[locale]],
       href: '/trayectoria',
-      text: [e.title[locale], e.detail[locale], e.tag[locale], e.date].join(' '),
+      text: [e.title[locale], e.detail[locale], e.tag[locale], e.date[locale]].join(' '),
     });
   }
 
@@ -83,7 +83,7 @@ export function buildCorpus(locale: Locale): SearchDoc[] {
       title: c.name,
       subtitle: c.issuer,
       // El emisor ya va como subtitulo; solo se etiqueta el ano.
-      tags: c.date ? [c.date.slice(0, 4)] : [],
+      tags: [c.date.slice(0, 4)],
       href: '/sobre-mi',
       text: [c.name, c.issuer].join(' '),
     });

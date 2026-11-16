@@ -1,43 +1,43 @@
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
 import { profile } from '@/lib/data/profile';
 
+/** Pie del boletín: de dónde salen las cifras, contacto y fecha de actualización. */
 export async function Footer() {
   const t = await getTranslations('footer');
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-line">
-      <div className="mx-auto flex max-w-editorial flex-col gap-6 px-5 py-10 md:flex-row md:items-end md:justify-between md:px-8">
-        <div>
-          <p className="font-serif text-lg text-ink">{profile.shortName}</p>
-          <p className="mt-1 max-w-prose text-sm text-muted">{t('builtWith')}</p>
+    <footer className="border-t-2 border-ink">
+      <div className="sheet grid gap-8 py-10 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <p className="font-display text-[1.125rem] font-bold text-ink [font-stretch:104%]">
+            {profile.name}
+          </p>
+          <p className="mt-2 max-w-prose text-[0.9375rem] text-muted">{t('method')}</p>
         </div>
-        <div className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wider">
-          <div className="flex flex-wrap gap-4">
-            {profile.socials.map((s) => (
-              <a
-                key={s.href}
-                href={s.href}
-                target="_blank"
-                rel="me noopener noreferrer"
-                className="text-muted transition-colors hover:text-agar-deep"
-              >
+        <ul className="space-y-1.5 text-[0.9375rem] md:col-span-5 md:justify-self-end">
+          <li>
+            <a href={`mailto:${profile.email}`} className="link">
+              {profile.email}
+            </a>
+          </li>
+          {profile.socials.map((s) => (
+            <li key={s.href}>
+              <a href={s.href} target="_blank" rel="me noopener noreferrer" className="link">
                 {s.label}
               </a>
-            ))}
-            <Link href="/contacto" className="text-muted transition-colors hover:text-agar-deep">
-              {t('security') === 'Security policy' ? 'Contact' : 'Contacto'}
-            </Link>
-          </div>
-          <a href="/SECURITY.md" className="text-muted transition-colors hover:text-agar-deep">
-            {t('security')}
-          </a>
-        </div>
+            </li>
+          ))}
+          <li>
+            <a href="/.well-known/security.txt" className="link">
+              {t('security')}
+            </a>
+          </li>
+        </ul>
       </div>
       <div className="border-t border-line">
-        <p className="mx-auto max-w-editorial px-5 py-4 font-mono text-[0.68rem] text-muted md:px-8">
-          &copy; {year} {profile.name}. {t('rights')}
+        <p className="sheet py-4 text-[0.875rem] text-muted">
+          &copy; {year} {profile.name}. {t('rights')} {t('updated')}
         </p>
       </div>
     </footer>

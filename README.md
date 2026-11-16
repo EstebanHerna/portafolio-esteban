@@ -1,78 +1,103 @@
-# Portafolio - Esteban Alejandro Hernandez Sulvara
+# Portafolio de Esteban Hernández
 
-Portafolio profesional bilingue (ES/EN). Ingeniero de sistemas y computacion (Uniandes) que construye productos de software con machine learning e inteligencia artificial —salud y biomedicina, movil, cloud y robotica— con el rigor que aplicaria a un sistema critico.
+Sitio bilingüe (español por defecto, inglés en `/en`) de Esteban Alejandro Hernández Sulvara: ingeniería de datos e IA aplicada con Python, SQL, Apache Airflow y AWS.
+
+En producción: https://portafolio-esteban-mu.vercel.app
 
 ## Stack
 
-- Next.js 15 (App Router) + TypeScript
-- Tailwind CSS (tokens de diseno en `tailwind.config.ts`)
-- next-intl (ES por defecto sin prefijo, EN en `/en`)
-- Motion (`motion/react`) para animacion; SVG dibujado por scroll
-- Upstash Redis para rate limiting de `/api/contact`
+- Next.js 15 (App Router) y TypeScript estricto
+- Tailwind CSS, con los tokens de diseño en `tailwind.config.ts` y `src/app/globals.css`
+- next-intl para las rutas por idioma
+- Upstash Redis (límite de envíos) y Resend (correo) en `/api/contact`
+- Vitest para pruebas unitarias y Playwright para pruebas de extremo a extremo
 - Despliegue en Vercel
-
-## Requisitos
-
-- Node.js >= 18.18
-- npm
 
 ## Desarrollo
 
+Requiere Node.js 18.18 o superior.
+
 ```bash
 npm install
-cp .env.example .env.local   # dejar valores vacios salvo local
+cp .env.example .env.local   # los valores pueden quedar vacíos en local
 npm run dev
 ```
 
-Abrir http://localhost:3000
+El sitio abre en http://localhost:3000.
 
-## Scripts
+## Verificación
 
-- `npm run dev` - desarrollo
-- `npm run build` / `npm run start` - build y produccion
-- `npm run typecheck` - TypeScript sin emitir
-- `npm run lint` - ESLint (next)
-- `npm run format` / `format:check` - Prettier
-- `npm test` - Vitest (unidad)
-- `npm run test:e2e` - Playwright (e2e)
+Todo cambio debe pasar estos cuatro pasos antes de subirse. Son los mismos que corre la integración continua en `.github/workflows/ci.yml`.
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run build
+```
+
+Si el cambio toca la navegación, también `npm run test:e2e` (la primera vez hay que instalar el navegador con `npx playwright install chromium`).
 
 ## Estructura
 
 ```
 src/
-  app/[locale]/        paginas: inicio, proyectos, proceso, trayectoria, sobre-mi, contacto
-  app/api/contact/     funcion serverless del formulario (rate limit + honeypot)
-  components/          Nav, Footer, TurbidityCurve, ProcessDiagram, ContactForm, ...
-  lib/data/            contenido tipado: projects, timeline, certifications, stack, profile, process
-  i18n/                routing, navigation, request (next-intl)
-  messages/            es.json, en.json
-middleware.ts          cabeceras de seguridad + CSP con nonce
+  app/
+    [locale]/              páginas: inicio, proyectos, trayectoria, sobre-mi, explorar, contacto
+    [locale]/proyectos/[slug]/   una sola ruta para todos los proyectos
+    api/contact/           formulario de contacto (validación, límite de envíos, honeypot)
+  components/              cabecera, pie, cuadros, gráficos y formularios
+  lib/
+    data/                  contenido tipado: proyectos, trayectoria, certificaciones, herramientas, perfil
+    rag/                   buscador TF-IDF que corre en el navegador (página Explorar)
+    format.ts              cifras y fechas según el idioma
+  i18n/                    configuración de next-intl
+  messages/                textos de la interfaz en es.json y en.json
+  middleware.ts            cabeceras de seguridad y CSP con nonce
+tests/
+  content.test.ts          reglas de contenido que no se pueden romper
+  rag.test.ts              tokenización, índice y recuperación
+  e2e/                     pruebas de humo con Playwright
+public/
+  cv/                      los dos CV que el sitio ofrece para descargar
+docs/
+  AUDIT.md                 auditoría previa al primer despliegue
 ```
+
+## Cómo cambiar el contenido
+
+Los hechos viven en `src/lib/data` y los textos de interfaz en `src/messages`. Las páginas no llevan contenido escrito a mano.
+
+- **Agregar un proyecto:** añade su identificador a `ProjectSlug` en `src/lib/types.ts` y una entrada en `src/lib/data/projects.ts`. La página, el índice, el buscador y el mapa del sitio lo toman de ahí.
+- **Agregar una certificación:** una entrada en `src/lib/data/certifications.ts` con la fecha y el código tal como aparecen en el certificado.
+- Cada texto existe en español y en inglés. Las pruebas fallan si falta alguno.
+
+## Reglas de contenido
+
+`tests/content.test.ts` las comprueba en cada ejecución:
+
+- Los proyectos van en un orden fijo, con el flujo de salud ambiental primero.
+- El titular y la portada no nombran a la entidad donde se hizo la práctica; el trabajo se presenta como proyecto de grado.
+- HemoVision conserva la aclaración de datos sintéticos con el mismo peso visual que las cifras.
+- BacterioScope se presenta como investigación en curso y declara la brecha frente a su meta de exactitud.
+- Altus se presenta como concepto de competencia: sin cifras, sin cartas, no desplegado; participación (no selección) en Cornell EMC2.
+- NexusMind figura como semifinalista de AWS 10,000 AIdeas.
+- La lista de herramientas solo incluye lo que se puede defender en una entrevista.
 
 ## Variables de entorno
 
-Ver `.env.example`. Nunca commitear valores reales; definirlas en el panel de Vercel.
+Los nombres están en `.env.example`. Los valores reales se definen solo en el panel de Vercel.
 
-- `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` - rate limiting del formulario.
-- `CONTACT_TO_EMAIL`, `CONTACT_EMAIL_PROVIDER_API_KEY` - envio de correo (integrar proveedor).
-- `NEXT_PUBLIC_SITE_URL` - URL publica para metadatos y sitemap.
+| Variable                                             | Para qué                                    |
+| ---------------------------------------------------- | ------------------------------------------- |
+| `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Límite de envíos del formulario             |
+| `CONTACT_TO_EMAIL`, `RESEND_API_KEY`, `RESEND_FROM`  | Envío del correo de contacto                |
+| `NEXT_PUBLIC_SITE_URL`                               | URL pública para metadatos y mapa del sitio |
 
 ## Seguridad
 
-Ver `SECURITY.md`. Cabeceras completas via middleware, CSP con nonce, rate limiting, honeypot, gitleaks, CodeQL y Dependabot.
+Ver `SECURITY.md`. El sitio envía CSP con nonce por petición y el resto de cabeceras desde `src/middleware.ts`. El formulario valida con Zod, limita los envíos por IP y rechaza peticiones de otro origen. Gitleaks corre antes de cada commit y en la integración continua, junto con CodeQL y Dependabot.
 
-## Contenido: reglas no negociables
+## Lo que no se versiona
 
-- HemoVision conserva SIEMPRE el disclaimer de datos sinteticos con el mismo peso visual que las metricas.
-- BacterioScope se presenta como investigacion en curso, nunca como producto terminado; sin metricas clinicas.
-- En BacterioScope solo se nombra a Paula Becerra (unica autorizacion registrada).
-- Altus se presenta sobrio, sin stack inventado.
-- Sin emojis en la interfaz ni en el copy; sin estetica default de IA.
-
-## Pendientes (ver AUDIT.md)
-
-Foto real (`/public/esteban.jpg` es placeholder), dominio, URL del repo de BacterioScope, visibilidad de NexusMind, fecha de la certificacion de Google, descripcion tecnica de Altus.
-
-## Nota de tipografia
-
-El cuerpo usa Hanken Grotesk (Google Fonts) en la ranura prevista para Mona Sans, que no esta en Google Fonts. Para usar Mona Sans real, anadir su `.woff2` en `/public/fonts` y cambiar a `next/font/local` manteniendo la variable `--font-mona-sans` (ver `src/app/[locale]/layout.tsx`).
+`.gitignore` deja fuera los certificados y documentos personales (`_privado/`), el contexto interno de trabajo y todos los PDF excepto los de `public/cv/`.

@@ -1,41 +1,66 @@
 import type { StackGroup } from '@/lib/types';
 
-/** Stack tecnico agrupado. Prioriza lo defendible en entrevista. */
+/**
+ * Herramientas por área, tomadas de jobpilot/profile. Solo lo defendible en entrevista.
+ * Kubernetes queda fuera (decisión del 15 nov. 2026): se usa Docker y ECS Fargate.
+ */
 export const stack: StackGroup[] = [
   {
     label: { es: 'Lenguajes', en: 'Languages' },
-    items: ['Python', 'Java', 'Kotlin', 'JavaScript/TypeScript', 'C', 'C++', 'SQL'],
+    items: ['Python', 'SQL', 'Java', 'Kotlin', 'TypeScript', 'JavaScript', 'C'],
   },
   {
-    label: { es: 'Movil', en: 'Mobile' },
-    items: ['Android (Kotlin)', 'Jetpack Compose', 'MVVM', 'StateFlow', 'Retrofit'],
+    label: { es: 'Ingeniería de datos', en: 'Data engineering' },
+    items: ['Apache Airflow', 'ETL', 'Validación de datos', 'Trazabilidad', 'Modelado de datos'],
+  },
+  {
+    label: { es: 'Análisis de datos', en: 'Data analysis' },
+    items: [
+      'pandas',
+      'NumPy',
+      'SciPy',
+      'statsmodels',
+      'GeoPandas',
+      'PySAL',
+      'Matplotlib',
+      'Power BI',
+    ],
+  },
+  {
+    label: { es: 'IA y aprendizaje automático', en: 'AI and machine learning' },
+    items: [
+      'scikit-learn',
+      'OpenCV',
+      'YOLOv8',
+      'XGBoost',
+      'RAG',
+      'LangChain',
+      'Amazon Bedrock',
+      'OpenAI API',
+    ],
   },
   {
     label: { es: 'Backend', en: 'Backend' },
-    items: ['NestJS', 'Spring Boot', 'FastAPI', 'Django', 'Node.js', 'REST APIs'],
+    items: ['FastAPI', 'Flask', 'NestJS', 'Spring Boot', 'Django', 'APIs REST', 'OpenAPI'],
   },
   {
-    label: { es: 'Frontend', en: 'Frontend' },
-    items: ['React', 'Next.js', 'Angular', 'HTML/CSS'],
-  },
-  {
-    label: { es: 'Cloud e IA generativa', en: 'Cloud and generative AI' },
-    items: ['AWS Lambda', 'DynamoDB', 'API Gateway', 'EventBridge', 'Amazon Bedrock', 'Vercel'],
-  },
-  {
-    label: { es: 'Machine Learning', en: 'Machine Learning' },
-    items: ['TensorFlow', 'scikit-learn', 'Pandas', 'NumPy', 'TF-IDF'],
-  },
-  {
-    label: { es: 'Robotica', en: 'Robotics' },
-    items: ['ROS', 'ROS2', 'SLAM (Swarm-SLAM, Kimera-Multi)', 'A*', 'Theta*'],
+    label: { es: 'Nube y DevOps', en: 'Cloud and DevOps' },
+    items: [
+      'Docker',
+      'ECS Fargate',
+      'Elastic Beanstalk',
+      'CodePipeline',
+      'AWS Lambda',
+      'Amazon DynamoDB',
+      'GitHub Actions',
+    ],
   },
   {
     label: { es: 'Bases de datos', en: 'Databases' },
-    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Firebase'],
+    items: ['PostgreSQL', 'MongoDB', 'Amazon DynamoDB', 'Firebase'],
   },
   {
-    label: { es: 'DevOps', en: 'DevOps' },
-    items: ['Git', 'GitHub', 'Docker', 'Nginx', 'CI/CD'],
+    label: { es: 'Calidad de software', en: 'Software quality' },
+    items: ['pytest', 'Cobertura de pruebas', 'Pruebas de carga', 'Análisis estático'],
   },
 ];

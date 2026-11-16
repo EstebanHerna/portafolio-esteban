@@ -1,167 +1,210 @@
 import type { TimelineEntry } from '@/lib/types';
 
-/** Linea de tiempo real, cronologica. Datos del CV de Esteban. Sin genericos. */
+/** Trayectoria verificada contra jobpilot/profile. Fechas tal como figuran allí. */
 export const timeline: TimelineEntry[] = [
   {
-    date: 'Jun. 2020 - Feb. 2022',
+    date: { es: 'Jun. 2020 - feb. 2022', en: 'Jun 2020 - Feb 2022' },
     sortKey: 202006,
     tag: { es: 'Emprendimiento', en: 'Venture' },
-    title: { es: 'Respira Seguro', en: 'Respira Seguro' },
-    detail: {
-      es: 'Director de un emprendimiento propio de comercializacion de productos de higiene durante la pandemia, con proveedor exclusivo e ingresos sostenidos.',
-      en: 'Director of a personal venture selling hygiene products during the pandemic, with an exclusive supplier and sustained revenue.',
-    },
-  },
-  {
-    date: '2022',
-    sortKey: 202212,
-    tag: { es: 'Educacion', en: 'Education' },
-    title: { es: 'Bachiller, Colegio Cafam', en: 'High school diploma, Colegio Cafam' },
-    detail: { es: 'Bogota.', en: 'Bogota.' },
-  },
-  {
-    date: '2023',
-    sortKey: 202301,
-    tag: { es: 'Educacion', en: 'Education' },
     title: {
-      es: 'Ingreso a Ingenieria de Sistemas y Computacion, Uniandes',
-      en: 'Started Systems and Computing Engineering, Uniandes',
+      es: 'Fundador y director de proyecto, Respira Seguro',
+      en: 'Founder and project director, Respira Seguro',
     },
-    detail: { es: 'Universidad de los Andes, Bogota.', en: 'Universidad de los Andes, Bogota.' },
+    detail: {
+      es: 'Emprendimiento de tapabocas y productos de higiene.',
+      en: 'Venture selling face masks and hygiene products.',
+    },
   },
   {
-    date: 'Jun. 2024 - Mar. 2025',
+    date: { es: '2023', en: '2023' },
+    sortKey: 202301,
+    tag: { es: 'Formación', en: 'Education' },
+    title: {
+      es: 'Ingreso a Ingeniería de Sistemas y Computación',
+      en: 'Started Systems and Computing Engineering',
+    },
+    detail: {
+      es: 'Universidad de los Andes, Bogotá.',
+      en: 'Universidad de los Andes, Bogotá.',
+    },
+  },
+  {
+    date: { es: 'Jun. 2024 - mar. 2025', en: 'Jun 2024 - Mar 2025' },
     sortKey: 202406,
     tag: { es: 'Docencia', en: 'Teaching' },
     title: {
-      es: 'Mentor y tutor academico (Uniandes)',
-      en: 'Academic mentor and tutor (Uniandes)',
+      es: 'Tutor académico, Universidad de los Andes',
+      en: 'Academic tutor, Universidad de los Andes',
     },
     detail: {
-      es: 'Tutorias individuales y grupales en Python, C, JavaScript y React; estructuras de datos, logica y depuracion.',
-      en: 'One-on-one and group tutoring in Python, C, JavaScript, and React; data structures, logic, and debugging.',
+      es: 'Tutorías en Python, C, JavaScript y React: estructuras de datos, lógica y depuración.',
+      en: 'Tutoring in Python, C, JavaScript and React: data structures, logic and debugging.',
     },
   },
   {
-    date: 'Oct. 2024 - presente',
-    sortKey: 202410,
-    tag: { es: 'Comunidad', en: 'Community' },
-    title: { es: 'Miembro activo de SinfonIA Uniandes', en: 'Active member of SinfonIA Uniandes' },
-    detail: {
-      es: 'Comunidad de IA de Uniandes (hibrido). Colaboro en sesiones tecnicas y lectura de papers sobre IA aplicada, aportando a proyectos de Machine Learning con enfoque en impacto real, y participo en talleres internos de robotica, NLP y vision computacional.',
-      en: 'Uniandes AI community (hybrid). I collaborate in technical sessions and paper reading on applied AI, contributing to Machine Learning projects focused on real impact, and take part in internal robotics, NLP, and computer-vision workshops.',
-    },
-  },
-  {
-    date: 'Dic. 2024',
-    sortKey: 202412,
-    tag: { es: 'Hackathon', en: 'Hackathon' },
-    title: { es: 'CaminAI - 3er lugar', en: 'CaminAI - 3rd place' },
-    detail: {
-      es: 'App web de accesibilidad visual con deteccion de obstaculos en tiempo real y guia por voz. 24h Hackathon Young AI Leaders Bogota, tema "AI for Good", entre +100 participantes y 20 equipos.',
-      en: 'Visual-accessibility web app with real-time obstacle detection and voice guidance. 24h Young AI Leaders Bogota hackathon, "AI for Good" theme, among 100+ participants and 20 teams.',
-    },
-    repoUrl: 'https://github.com/EstebanHerna/CAMIN_AI',
-  },
-  {
-    date: 'Dic. 2024 - Abr. 2025',
-    sortKey: 202412.5,
-    tag: { es: 'Competencia', en: 'Competition' },
-    title: { es: 'NexusMind - AWS AI League', en: 'NexusMind - AWS AI League' },
-    detail: {
-      es: 'Asistente proactivo de IA sobre Amazon Bedrock y arquitectura serverless. Top 100 de ~1000 equipos.',
-      en: 'Proactive AI assistant on Amazon Bedrock with serverless architecture. Top 100 of ~1000 teams.',
-    },
-  },
-  {
-    date: 'Ene. 2025 - Jun. 2025',
+    date: { es: 'Ene. - jun. 2025', en: 'Jan - Jun 2025' },
     sortKey: 202501,
-    tag: { es: 'Movil', en: 'Mobile' },
-    title: { es: 'UniMarket (ISIS-3510)', en: 'UniMarket (ISIS-3510)' },
-    detail: {
-      es: 'Marketplace Android para campus. Construi la mensajeria en tiempo real y el modulo LocationHelper (presencia en campus por formula de Haversine, radio 600 m); implemente AnalyticsLogger y la metrica BQ4 (tiempo promedio de respuesta del vendedor) sobre backend NestJS; autenticacion JWT por patron Interceptor y estado reactivo con StateFlow en Jetpack Compose.',
-      en: 'Android campus marketplace. I built the real-time messaging and the LocationHelper module (on-campus presence via the Haversine formula, 600 m radius); implemented AnalyticsLogger and the BQ4 metric (average seller response time) over a NestJS backend; JWT auth via the Interceptor pattern and reactive state with StateFlow in Jetpack Compose.',
+    tag: { es: 'Curso', en: 'Coursework' },
+    title: {
+      es: 'UniMarket, marketplace Android para el campus',
+      en: 'UniMarket, Android campus marketplace',
     },
-    repoUrl: 'https://github.com/ISIS3510-MobileApps-Group42-202610/group-42-general',
+    detail: {
+      es: 'Mensajería en tiempo real, detección de campus con la fórmula de Haversine y registro de analítica sobre NestJS; JWT con patrón Interceptor y StateFlow en Jetpack Compose.',
+      en: 'Real-time messaging, campus detection with the Haversine formula and analytics logging over NestJS; JWT with the Interceptor pattern and StateFlow in Jetpack Compose.',
+    },
+    href: 'https://github.com/ISIS3510-MobileApps-Group42-202610/group-42-general',
   },
   {
-    date: 'Mar. 2025 - May. 2025',
+    date: { es: 'Mar. - may. 2025', en: 'Mar - May 2025' },
     sortKey: 202503,
-    tag: { es: 'Robotica', en: 'Robotics' },
-    title: { es: 'Planificador A* con ROS2 (ISIS-4826)', en: 'A* planner with ROS2 (ISIS-4826)' },
+    tag: { es: 'Curso', en: 'Coursework' },
+    title: {
+      es: 'Planificador de rutas A* con ROS2',
+      en: 'A* path planner with ROS2',
+    },
     detail: {
-      es: 'A* sobre C-space inflado, simplificacion Theta* y nodo ROS2 con relocalizacion por LiDAR; analisis comparativo Swarm-SLAM vs Kimera-Multi.',
-      en: 'A* over an inflated C-space, Theta* simplification, and a ROS2 node with LiDAR relocalization; comparative analysis of Swarm-SLAM vs Kimera-Multi.',
+      es: 'A* sobre espacio de configuración inflado con simplificación Theta*, control proporcional y relocalización con LiDAR en un robot MentorPi; análisis comparativo de Swarm-SLAM y Kimera-Multi.',
+      en: 'A* over an inflated configuration space with Theta* simplification, proportional control and LiDAR relocalization on a MentorPi robot; comparative analysis of Swarm-SLAM and Kimera-Multi.',
     },
   },
   {
-    date: '2025',
-    sortKey: 202505,
-    tag: { es: 'Machine Learning', en: 'Machine Learning' },
-    title: { es: 'Pipeline de clasificacion de texto', en: 'Text-classification pipeline' },
-    detail: {
-      es: 'TF-IDF con Logistic Regression y LinearSVC; correccion de overfitting y data leakage en 5 iteraciones de submission.',
-      en: 'TF-IDF with Logistic Regression and LinearSVC; fixed overfitting and data leakage across 5 submission iterations.',
-    },
-  },
-  {
-    date: '2025',
+    date: { es: 'Jun. 2025 - actual', en: 'Jun 2025 - present' },
     sortKey: 202506,
-    tag: { es: 'Hackathon', en: 'Hackathon' },
-    title: { es: 'RepoTwin (IBM Bob, lablab.ai)', en: 'RepoTwin (IBM Bob, lablab.ai)' },
-    detail: {
-      es: 'Propuesta de "gemelo digital" de repositorios con Shadow PR para simular el impacto de un cambio de codigo antes de implementarlo.',
-      en: 'A "digital twin" for repositories with a Shadow PR that simulates the impact of a code change before implementing it.',
-    },
-  },
-  {
-    date: 'Jun. 2025 - presente',
-    sortKey: 202507,
     tag: { es: 'Comunidad', en: 'Community' },
     title: {
-      es: 'Miembro activo de Codelab (Uniandes)',
-      en: 'Active member of Codelab (Uniandes)',
+      es: 'Líder entrante de rama y proyectos, Codelab Uniandes',
+      en: 'Incoming branch and projects lead, Codelab Uniandes',
     },
     detail: {
-      es: 'Proyectos colaborativos de software con mentoria de profesores y buenas practicas.',
-      en: 'Collaborative software projects with faculty mentorship and best practices.',
+      es: 'Proyectos colaborativos de software con mentores y profesores.',
+      en: 'Collaborative software projects with mentors and faculty.',
     },
   },
   {
-    date: '2026',
+    date: { es: 'Ago. 2025 - jun. 2026', en: 'Aug 2025 - Jun 2026' },
+    sortKey: 202508,
+    tag: { es: 'Comunidad', en: 'Community' },
+    title: {
+      es: 'Miembro activo, SinfonIA Uniandes',
+      en: 'Active member, SinfonIA Uniandes',
+    },
+    detail: {
+      es: 'Comunidad de inteligencia artificial: sesiones técnicas, lectura de artículos y talleres de machine learning, NLP y visión por computador.',
+      en: 'Artificial intelligence community: technical sessions, paper reading and workshops on machine learning, NLP and computer vision.',
+    },
+  },
+  {
+    date: { es: 'Dic. 2025', en: 'Dec 2025' },
+    sortKey: 202512,
+    tag: { es: 'Hackathon', en: 'Hackathon' },
+    title: {
+      es: 'CaminAI, tercer lugar en Young AI Leaders Bogotá',
+      en: 'CaminAI, third place at Young AI Leaders Bogotá',
+    },
+    detail: {
+      es: 'App de guía por voz para personas con discapacidad visual. Tercer lugar entre 20 equipos.',
+      en: 'Voice guidance app for people with visual impairment. Third place among 20 teams.',
+    },
+    href: 'https://github.com/EstebanHerna/CAMIN_AI',
+  },
+  {
+    date: { es: 'Dic. 2025 - mar. 2026', en: 'Dec 2025 - Mar 2026' },
+    sortKey: 202512.5,
+    tag: { es: 'Competencia', en: 'Competition' },
+    title: {
+      es: 'NexusMind, semifinalista en AWS 10,000 AIdeas',
+      en: 'NexusMind, semifinalist in AWS 10,000 AIdeas',
+    },
+    detail: {
+      es: 'Líder del equipo. Asistente con Amazon Bedrock y backend serverless.',
+      en: 'Team lead. Assistant on Amazon Bedrock with a serverless backend.',
+    },
+    href: 'https://builder.aws.com/content/38SQ3tZeTgflU2LA1ntBJ9fMjHS/aideas-nexusmind-the-cognitive-load-balancer-for-modern-work',
+  },
+  {
+    date: { es: '2026', en: '2026' },
     sortKey: 202601,
-    tag: { es: 'Investigacion', en: 'Research' },
+    tag: { es: 'Investigación', en: 'Research' },
     title: {
-      es: 'BIDIC 2026, HemoVision y BacterioScope',
-      en: 'BIDIC 2026, HemoVision and BacterioScope',
+      es: 'BacterioScope, seleccionado para el Biodiscovery Design Innovation Challenge 2026',
+      en: 'BacterioScope, selected for the Biodiscovery Design Innovation Challenge 2026',
     },
     detail: {
-      es: 'Giro de BioPatch a BacterioScope, arranque de HemoVision y propuesta de tesis de Astrid Berena Herrera.',
-      en: 'Pivot from BioPatch to BacterioScope, start of HemoVision, and Astrid Berena Herrera thesis proposal.',
+      es: 'Fundador y líder de un equipo de 4 personas.',
+      en: 'Founder and lead of a team of 4.',
+    },
+    href: 'https://github.com/EstebanHerna/bacterioscope',
+  },
+  {
+    date: { es: '2026', en: '2026' },
+    sortKey: 202602,
+    tag: { es: 'Formación', en: 'Education' },
+    title: {
+      es: 'Electivas de la Maestría en Ingeniería de Software (MISO)',
+      en: "Master's in Software Engineering (MISO) electives",
+    },
+    detail: {
+      es: 'Diseño y Construcción de APIs, y DevOps, cursadas durante el pregrado.',
+      en: 'API Design and Construction, and DevOps, taken during the undergraduate degree.',
     },
   },
   {
-    date: 'Abr. 2026 - presente',
+    date: { es: 'Abr. 2026 - actual', en: 'Apr 2026 - present' },
     sortKey: 202604,
-    tag: { es: 'Venture', en: 'Venture' },
-    title: { es: 'Altus - cofundador y CTO', en: 'Altus - co-founder and CTO' },
+    tag: { es: 'Competencia', en: 'Competition' },
+    title: { es: 'Cofundador y CTO, Altus', en: 'Co-founder and CTO, Altus' },
     detail: {
-      es: 'API de inteligencia crediticia para adultos no bancarizados en LATAM a partir de datos alternativos. MVP desplegado, dos cartas de intencion de piloto y seleccion al Cornell EMC2 Mark Mobius Pitch 2026.',
-      en: 'Credit-intelligence API for unbanked adults in LATAM from alternative data. Deployed MVP, two pilot letters of intent, and selection for the Cornell EMC2 Mark Mobius Pitch 2026.',
+      es: 'Concepto de scoring crediticio con datos alternativos. Participé con el equipo en el Cornell EMC2 Mark Mobius Pitch Competition 2026.',
+      en: 'Alternative-data credit scoring concept. Took part with the team in the Cornell EMC2 Mark Mobius Pitch Competition 2026.',
     },
-    repoUrl: 'https://github.com/EstebanHerna/altusmaintain',
+    href: 'https://github.com/EstebanHerna/altusmaintain',
   },
   {
-    date: '05 Jul. 2026',
-    sortKey: 202607,
-    tag: { es: 'Certificaciones', en: 'Certifications' },
+    date: { es: 'Ago. 2026 - actual', en: 'Aug 2026 - present' },
+    sortKey: 202608,
+    tag: { es: 'Práctica', en: 'Internship' },
     title: {
-      es: 'Cuatro certificaciones de Codigo Facilito',
-      en: 'Four Codigo Facilito certifications',
+      es: 'Practicante de Ingeniería de Sistemas',
+      en: 'Systems Engineering intern',
     },
     detail: {
-      es: 'GitHub a fondo, C Profesional, Power BI y fundamentos de SQL.',
-      en: 'GitHub in depth, Professional C, Power BI, and SQL fundamentals.',
+      es: 'Vinculación formativa en el Ministerio de Salud y Protección Social. Allí construí el flujo reproducible de salud ambiental, que también es mi proyecto de grado.',
+      en: 'Internship at the Colombian Ministry of Health and Social Protection. There I built the reproducible environmental health workflow, which is also my undergraduate thesis.',
+    },
+  },
+  {
+    date: { es: 'Sep. - oct. 2026', en: 'Sep - Oct 2026' },
+    sortKey: 202609,
+    tag: { es: 'Certificación', en: 'Certification' },
+    title: {
+      es: 'Dos certificados del NVIDIA Deep Learning Institute',
+      en: 'Two NVIDIA Deep Learning Institute certificates',
+    },
+    detail: {
+      es: 'Rapid Application Development with Large Language Models y Applications of AI for Anomaly Detection.',
+      en: 'Rapid Application Development with Large Language Models and Applications of AI for Anomaly Detection.',
+    },
+  },
+  {
+    date: { es: 'Sep. - oct. 2026', en: 'Sep - Oct 2026' },
+    sortKey: 202609.5,
+    tag: { es: 'Hackathon', en: 'Hackathon' },
+    title: { es: 'KingsCode, AI Week 2026', en: 'KingsCode, AI Week 2026' },
+    detail: {
+      es: 'Sistema RAG sobre derecho colombiano con Qwen3-8B y verificación de citas.',
+      en: 'RAG system on Colombian law with Qwen3-8B and citation checks.',
+    },
+    href: 'https://github.com/IngSeb0/KingsCodeNvidia',
+  },
+  {
+    date: { es: '2025 - 2026', en: '2025 - 2026' },
+    sortKey: 202510,
+    tag: { es: 'Hackathon', en: 'Hackathon' },
+    title: { es: 'Otros hackatones', en: 'Other hackathons' },
+    detail: {
+      es: 'RepoTwin (IBM Bob, lablab.ai), Nebius x NVIDIA Global AI Hackathon 2026 y Nodi x Lovable.',
+      en: 'RepoTwin (IBM Bob, lablab.ai), Nebius x NVIDIA Global AI Hackathon 2026 and Nodi x Lovable.',
     },
   },
 ];

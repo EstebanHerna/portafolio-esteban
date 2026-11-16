@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ArrowUpRight } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { ScrollReveal } from '@/components/ScrollReveal';
 import { timelineReverse } from '@/lib/data/timeline';
 import type { Locale } from '@/i18n/routing';
 
@@ -21,51 +20,53 @@ export default async function TimelinePage({ params }: { params: Promise<{ local
   const t = await getTranslations('timeline');
 
   return (
-    <section className="editorial-grid py-14 md:py-20">
-      <div className="col-span-4 md:col-span-12">
-        <div className="lab-rule mb-12 max-w-prose">
-          <h1 className="font-serif text-4xl text-ink md:text-5xl">{t('title')}</h1>
-          <p className="mt-3 text-ink-soft">{t('subtitle')}</p>
-        </div>
+    <section className="sheet pb-24 pt-12 md:pt-16">
+      <h1 className="title-page">{t('title')}</h1>
+      <p className="mt-4 max-w-prose text-[1.125rem]">{t('subtitle')}</p>
 
-        <ol className="relative border-l border-line pl-6 md:pl-8">
-          {timelineReverse.map((entry, i) => (
-            <ScrollReveal
-              key={`${entry.sortKey}-${i}`}
-              as="li"
-              delay={i * 0.03}
-              className="relative pb-10 last:pb-0"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute -left-[calc(1.5rem+3px)] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-agar bg-bone md:-left-[calc(2rem+3px)]"
-              />
-              <div className="flex flex-wrap items-baseline gap-x-3">
-                <span className="font-mono text-xs uppercase tracking-wider text-agar-deep">
-                  {entry.date}
-                </span>
-                <span className="data-chip border-none px-0 text-muted">{entry.tag[locale]}</span>
-              </div>
-              <h2 className="mt-1.5 font-serif text-xl text-ink">{entry.title[locale]}</h2>
-              <p className="mt-1.5 max-w-prose text-ink-soft">{entry.detail[locale]}</p>
-              {entry.repoUrl && (
-                <a
-                  href={entry.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group mt-2 inline-flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-muted transition-colors duration-200 hover:text-agar-deep"
-                >
-                  {t('viewRepo')}
-                  <ArrowUpRight
-                    size={13}
-                    className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </a>
-              )}
-            </ScrollReveal>
+      <table className="cuadro stack-md mt-12">
+        <caption className="caption pb-2 text-left">
+          <span className="caption-num">{t('tableLabel')}</span> {t('tableTitle')}
+        </caption>
+        <thead className="max-md:sr-only">
+          <tr>
+            <th scope="col" className="w-[20%]">
+              {t('colDate')}
+            </th>
+            <th scope="col">{t('colWhat')}</th>
+            <th scope="col" className="w-[16%]">
+              {t('colType')}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {timelineReverse.map((entry) => (
+            <tr key={`${entry.sortKey}-${entry.title.en}`}>
+              <td className="whitespace-nowrap font-display font-semibold text-ink [font-stretch:92%]">
+                {entry.date[locale]}
+              </td>
+              <th scope="row" className="font-normal">
+                <span className="block font-semibold text-ink">{entry.title[locale]}</span>
+                <span className="mt-1 block max-w-prose text-ink-soft">{entry.detail[locale]}</span>
+                {entry.href && (
+                  <a
+                    href={entry.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link mt-1.5 inline-flex items-center gap-1 text-[0.9375rem]"
+                  >
+                    {t('viewLink')} <ArrowUpRight size={14} aria-hidden="true" />
+                  </a>
+                )}
+              </th>
+              <td className="text-[0.9375rem] text-muted">{entry.tag[locale]}</td>
+            </tr>
           ))}
-        </ol>
-      </div>
+        </tbody>
+      </table>
+      <p className="fuente">
+        <b>{t('source')}</b> {t('tableSource')}
+      </p>
     </section>
   );
 }

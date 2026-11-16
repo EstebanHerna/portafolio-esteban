@@ -4,16 +4,15 @@ import './globals.css';
 export default function GlobalNotFound() {
   return (
     <html lang="es">
-      <body className="bg-bone text-ink">
-        <main className="mx-auto flex min-h-screen max-w-editorial flex-col justify-center px-6">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted">404</p>
-          <h1 className="mt-4 font-serif text-4xl">Pagina no encontrada / Page not found</h1>
-          <Link
-            href="/"
-            className="mt-8 font-mono text-xs uppercase tracking-wider text-agar-deep underline"
-          >
-            Inicio / Home
-          </Link>
+      <body>
+        <main className="sheet flex min-h-screen flex-col justify-center">
+          <h1 className="title-page">Página no encontrada / Page not found</h1>
+          <p className="mt-4 text-muted">Error 404</p>
+          <p className="mt-8">
+            <Link href="/" className="btn btn-outline">
+              Inicio / Home
+            </Link>
+          </p>
         </main>
       </body>
     </html>

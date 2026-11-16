@@ -5,9 +5,16 @@ export type { Locale };
 /** Texto disponible en ambos locales. */
 export type Localized = Record<Locale, string>;
 
-export type ProjectSlug = 'bacterioscope' | 'hemovision' | 'nexusmind' | 'altus';
+export type ProjectSlug =
+  | 'salud-ambiental'
+  | 'bacterioscope'
+  | 'kingscode'
+  | 'nexusmind'
+  | 'altus'
+  | 'hemovision'
+  | 'microservicios-aws';
 
-export type ProjectStatusKind = 'research' | 'shipped' | 'competition';
+export type ProjectStatusKind = 'thesis' | 'research' | 'shipped' | 'competition' | 'coursework';
 
 export interface ProjectStatus {
   kind: ProjectStatusKind;
@@ -15,13 +22,15 @@ export interface ProjectStatus {
 }
 
 export interface Metric {
-  /** Valor mostrado en monoespaciada (dato duro). */
-  value: string;
+  /** Cifra tal como se imprime en cada idioma (coma o punto decimal). */
+  value: Localized;
   label: Localized;
+  /** Cómo se obtuvo o cómo se comprueba. */
+  note?: Localized;
 }
 
 export interface Collaborator {
-  /** Solo nombres con autorizacion registrada. */
+  /** Solo nombres con autorización registrada. */
   name: string;
   role: Localized;
 }
@@ -31,13 +40,32 @@ export interface ProjectLink {
   href: string;
 }
 
+export interface PipelineSource {
+  name: string;
+  what: Localized;
+}
+
+export interface PipelineStage {
+  name: Localized;
+  detail: Localized;
+}
+
+/** Etapas de un flujo de datos, en orden de ejecución. */
+export interface Pipeline {
+  title: Localized;
+  sources: PipelineSource[];
+  stages: PipelineStage[];
+  output: Localized;
+  source: Localized;
+  note: Localized;
+}
+
 export interface Project {
   slug: ProjectSlug;
-  name: string;
-  /** Peso en el indice; menor = mas arriba. */
+  name: Localized;
+  /** Peso en el índice; menor = más arriba. */
   order: number;
-  featured: boolean;
-  timeframe: string;
+  timeframe: Localized;
   status: ProjectStatus;
   tagline: Localized;
   role: Localized;
@@ -46,34 +74,39 @@ export interface Project {
   problem: Localized;
   built: Localized;
   pending: Localized;
+  /** Diagrama de etapas, cuando el proyecto es un flujo de datos. */
+  pipeline?: Pipeline;
   metrics?: Metric[];
-  /** Disclaimer con el mismo peso visual que las metricas. */
+  /** De dónde salen las cifras del cuadro. */
+  metricsSource?: Localized;
+  /** Aclaración con el mismo peso visual que las cifras. */
   disclaimer?: Localized;
   collaborators?: Collaborator[];
-  /** null => el repositorio no es publico; no se muestra boton. */
-  repoUrl?: string | null;
+  /** null => el repositorio no es público; se dice de forma explícita. */
+  repoUrl: string | null;
   links?: ProjectLink[];
 }
 
 export interface TimelineEntry {
-  /** Fecha o rango tal como Esteban lo reporto. */
-  date: string;
-  /** Clave de ordenamiento aproximada (YYYYMM). */
+  date: Localized;
+  /** Clave de ordenamiento (YYYYMM). */
   sortKey: number;
   title: Localized;
   detail: Localized;
   tag: Localized;
-  /** Repositorio publico asociado, si existe. */
-  repoUrl?: string;
+  /** Enlace público asociado, si existe. */
+  href?: string;
 }
 
 export interface Certification {
   name: string;
   issuer: string;
-  date: string | null;
-  duration?: string;
+  /** Fecha ISO (YYYY-MM-DD) impresa en el certificado. */
+  date: string;
+  duration?: Localized;
+  /** Código o ID de credencial impreso en el certificado. */
   code?: string;
-  /** URL publica de verificacion; si existe, la credencial se vuelve un enlace. */
+  /** URL pública de verificación, solo si el emisor la ofrece. */
   verifyUrl?: string;
 }
 

@@ -1,50 +1,41 @@
 import type { Config } from 'tailwindcss';
 
 /**
- * Tokens de diseno del portafolio. Estetica "cuaderno de laboratorio editorial".
- * Ningun token usa Inter, gradientes violeta-azul ni glassmorphism.
+ * Tokens del sistema "boletín estadístico": papel blanco frío, tinta azul marino,
+ * un carmesí para marcas y enlaces. El detalle está en DESIGN.md.
  */
 const config: Config = {
   content: ['./src/**/*.{ts,tsx,mdx}'],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        bone: {
-          DEFAULT: '#F4F0E6',
-          deep: '#EBE5D6',
-        },
+        paper: '#FFFFFF',
+        tint: '#EEF2F7',
         ink: {
-          DEFAULT: '#1A1712',
-          soft: '#3A352C',
+          DEFAULT: '#0F1E3C',
+          soft: '#33415C',
         },
-        agar: {
-          DEFAULT: '#B8862F',
-          deep: '#7A5416',
+        muted: '#56637C',
+        line: '#C6D0DD',
+        navy: {
+          DEFAULT: '#12233F',
+          deep: '#0B1830',
+          line: '#2F446E',
+          soft: '#B4C2DA',
         },
-        muted: '#6B6355',
-        line: '#D8D0BE',
+        accent: {
+          DEFAULT: '#B5122F',
+          deep: '#8A0C22',
+          bright: '#FF6B81',
+        },
       },
       fontFamily: {
-        serif: ['var(--font-fraunces)', 'Georgia', 'serif'],
-        sans: ['var(--font-mona-sans)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-plex-mono)', 'ui-monospace', 'monospace'],
+        display: ['var(--font-archivo)', 'Arial Narrow', 'sans-serif'],
+        sans: ['var(--font-source-sans)', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         prose: '68ch',
-        editorial: '76rem',
-      },
-      letterSpacing: {
-        tightish: '-0.015em',
-      },
-      keyframes: {
-        'reveal-up': {
-          from: { opacity: '0', transform: 'translateY(12px)' },
-          to: { opacity: '1', transform: 'translateY(0)' },
-        },
-      },
-      animation: {
-        'reveal-up': 'reveal-up 0.6s ease-out both',
+        sheet: '78rem',
       },
     },
   },

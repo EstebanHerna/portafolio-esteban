@@ -21,14 +21,10 @@ export default async function ExplorarPage({ params }: { params: Promise<{ local
   const documents = buildCorpus(locale);
 
   return (
-    <section className="editorial-grid py-14 md:py-20">
-      <div className="col-span-4 md:col-span-12">
-        <div className="lab-rule mb-8 max-w-prose">
-          <h1 className="font-serif text-4xl text-ink md:text-5xl">{t('title')}</h1>
-          <p className="mt-3 text-ink-soft">{t('subtitle')}</p>
-        </div>
-        <Explorer documents={documents} />
-      </div>
+    <section className="sheet pb-24 pt-12 md:pt-16">
+      <h1 className="title-page">{t('title')}</h1>
+      <p className="mb-10 mt-4 max-w-prose text-[1.125rem]">{t('subtitle')}</p>
+      <Explorer documents={documents} />
     </section>
   );
 }

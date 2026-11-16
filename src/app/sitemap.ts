@@ -3,12 +3,12 @@ import { projects } from '@/lib/data/projects';
 import { routing } from '@/i18n/routing';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://esteban-hernandez.vercel.app';
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portafolio-esteban-mu.vercel.app';
   const paths = [
     '',
     '/proyectos',
     ...projects.map((p) => `/proyectos/${p.slug}`),
-    '/proceso',
+    '/explorar',
     '/trayectoria',
     '/sobre-mi',
     '/contacto',

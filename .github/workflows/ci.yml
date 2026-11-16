@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: https://esteban-hernandez.vercel.app
+          NEXT_PUBLIC_SITE_URL: https://portafolio-esteban-mu.vercel.app
 
   gitleaks:
     runs-on: ubuntu-latest

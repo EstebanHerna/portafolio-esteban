@@ -1,51 +1,47 @@
 'use client';
 
+import { useTransition } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
-import { useTransition } from 'react';
 
-export function LocaleSwitcher() {
+/** Conmutador ES / EN. El idioma activo va subrayado; el otro es el que se puede pulsar. */
+export function LocaleSwitcher({ onCover = false }: { onCover?: boolean }) {
   const t = useTranslations('nav');
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
+  const current = onCover ? 'text-white' : 'text-ink';
+  const other = onCover ? 'text-navy-soft hover:text-white' : 'text-muted hover:text-accent';
+
   return (
     <div
-      className="flex items-center gap-1 font-mono text-xs"
+      className="flex items-center gap-2 text-[0.9375rem] font-semibold"
       role="group"
       aria-label={t('language')}
     >
-      {routing.locales.map((loc, i) => {
-        const active = loc === locale;
+      {routing.locales.map((loc) => {
+        const isCurrent = loc === locale;
         return (
-          <span key={loc} className="flex items-center">
-            {i > 0 && (
-              <span className="px-1 text-line" aria-hidden="true">
-                /
-              </span>
-            )}
-            <button
-              type="button"
-              lang={loc}
-              aria-current={active ? 'true' : undefined}
-              disabled={active || pending}
-              onClick={() =>
-                startTransition(() => {
-                  router.replace(pathname, { locale: loc });
-                })
-              }
-              className={
-                active
-                  ? 'uppercase text-agar-deep'
-                  : 'pressable uppercase text-muted underline decoration-line underline-offset-4 hover:text-ink'
-              }
-            >
-              {loc}
-            </button>
-          </span>
+          <button
+            key={loc}
+            type="button"
+            lang={loc}
+            aria-current={isCurrent ? 'true' : undefined}
+            disabled={isCurrent || pending}
+            onClick={() =>
+              startTransition(() => {
+                router.replace(pathname, { locale: loc });
+              })
+            }
+            className={`uppercase transition-colors ${
+              isCurrent ? `${current} underline decoration-2 underline-offset-[5px]` : other
+            }`}
+          >
+            {loc}
+          </button>
         );
       })}
     </div>

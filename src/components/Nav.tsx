@@ -2,97 +2,102 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Menu, X } from 'lucide-react';
 import { Link, usePathname } from '@/i18n/navigation';
 import { LocaleSwitcher } from './LocaleSwitcher';
-import { Menu, X } from 'lucide-react';
 
 const items = [
-  { href: '/', key: 'home' as const },
   { href: '/proyectos', key: 'projects' as const },
-  { href: '/explorar', key: 'explore' as const },
-  { href: '/proceso', key: 'process' as const },
   { href: '/trayectoria', key: 'timeline' as const },
   { href: '/sobre-mi', key: 'about' as const },
+  { href: '/explorar', key: 'explore' as const },
   { href: '/contacto', key: 'contact' as const },
 ];
 
+/**
+ * Cabecera del boletín: nombre a la izquierda, secciones a la derecha. Sobre la
+ * portada se imprime en blanco sobre el campo azul; en el resto, en tinta sobre papel.
+ */
 export function Nav() {
   const t = useTranslations('nav');
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const onCover = pathname === '/';
 
-  function isActive(href: string) {
-    if (href === '/') return pathname === '/';
-    return pathname.startsWith(href);
-  }
+  const isActive = (href: string) => pathname.startsWith(href);
+
+  const bar = onCover
+    ? 'bg-navy text-white border-b border-navy-line'
+    : 'bg-paper text-ink border-b-2 border-ink';
+  const idle = onCover ? 'text-navy-soft hover:text-white' : 'text-ink-soft hover:text-accent';
+  const active = onCover
+    ? 'text-white underline decoration-2 underline-offset-[6px]'
+    : 'text-accent underline decoration-2 underline-offset-[6px]';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bone/85 backdrop-blur-[2px]">
-      <nav className="mx-auto flex max-w-editorial items-center justify-between px-5 py-3 md:px-8">
-        <Link href="/" className="font-serif text-lg font-semibold tracking-tightish text-ink">
-          Esteban Hernandez
-          <span className="ml-1 text-agar" aria-hidden="true">
-            .
-          </span>
+    <header className={bar}>
+      <nav aria-label={t('main')} className="sheet flex items-center justify-between py-4">
+        <Link
+          href="/"
+          className="font-display text-[1.125rem] font-bold tracking-[-0.01em] [font-stretch:104%]"
+        >
+          Esteban Hernández
         </Link>
 
-        <ul className="hidden items-center gap-6 md:flex">
-          {items.slice(1).map((it) => (
+        <ul className="hidden items-center gap-7 md:flex">
+          {items.map((it) => (
             <li key={it.href}>
               <Link
                 href={it.href}
                 aria-current={isActive(it.href) ? 'page' : undefined}
-                className={
-                  isActive(it.href)
-                    ? 'font-mono text-xs uppercase tracking-wider text-agar-deep'
-                    : 'font-mono text-xs uppercase tracking-wider text-muted transition-colors hover:text-ink'
-                }
+                className={`text-[0.9375rem] font-medium transition-colors ${
+                  isActive(it.href) ? active : idle
+                }`}
               >
                 {t(it.key)}
               </Link>
             </li>
           ))}
           <li>
-            <LocaleSwitcher />
+            <LocaleSwitcher onCover={onCover} />
           </li>
         </ul>
 
-        <div className="flex items-center gap-3 md:hidden">
-          <LocaleSwitcher />
+        <div className="flex items-center gap-4 md:hidden">
+          <LocaleSwitcher onCover={onCover} />
           <button
             type="button"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={t('toggleMenu')}
+            aria-label={open ? t('closeMenu') : t('openMenu')}
             onClick={() => setOpen((v) => !v)}
-            className="pressable text-ink hover:text-agar-deep"
+            className="-mr-2 p-2"
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
           </button>
         </div>
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="border-t border-line md:hidden">
-          <ul className="mx-auto flex max-w-editorial flex-col px-5 py-2">
-            {items.map((it) => (
-              <li key={it.href}>
-                <Link
-                  href={it.href}
-                  onClick={() => setOpen(false)}
-                  aria-current={isActive(it.href) ? 'page' : undefined}
-                  className={
-                    isActive(it.href)
-                      ? 'block py-2.5 font-mono text-sm uppercase tracking-wider text-agar-deep'
-                      : 'block py-2.5 font-mono text-sm uppercase tracking-wider text-muted'
-                  }
-                >
-                  {t(it.key)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul
+          id="mobile-menu"
+          className={`sheet pb-4 md:hidden ${onCover ? '' : 'border-t border-line'}`}
+        >
+          {items.map((it) => (
+            <li key={it.href} className={onCover ? 'border-t border-navy-line' : ''}>
+              <Link
+                href={it.href}
+                onClick={() => setOpen(false)}
+                aria-current={isActive(it.href) ? 'page' : undefined}
+                className={`block py-3 text-[1.0625rem] font-medium ${
+                  isActive(it.href) ? active : idle
+                }`}
+              >
+                {t(it.key)}
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
     </header>
   );
