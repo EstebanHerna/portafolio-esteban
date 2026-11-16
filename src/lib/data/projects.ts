@@ -317,8 +317,8 @@ export const projects: Project[] = [
       en: 'A system that read Gmail and Google Calendar and generated the pre-meeting briefing with Amazon Bedrock (Claude 3 Haiku). The backend was serverless: 9 Lambda functions with EventBridge, DynamoDB and API Gateway. The frontend was built in React.',
     },
     pending: {
-      es: 'Proyecto de competencia cerrado. Llegó a semifinales; no tuvo usuarios en producción y el despliegue en AWS ya no está activo.',
-      en: 'Closed competition project. It reached the semifinals; it had no production users and the AWS deployment is no longer running.',
+      es: 'Proyecto de competencia cerrado. Llegó a semifinales; no tuvo usuarios en producción.',
+      en: 'Closed competition project. It reached the semifinals; it had no production users.',
     },
     repoUrl: 'https://github.com/EstebanHerna/Aws_idea',
     links: [
@@ -472,8 +472,8 @@ export const projects: Project[] = [
       en: 'For the monolith: we defined a shared OpenAPI contract, set up a Prism mock server and ran k6 load tests on the Simulation microservice, which I led. For delivery, in the DevopsKings project: I deployed a REST microservice in Flask with PostgreSQL (Amazon RDS) on Elastic Beanstalk, with continuous integration in CodeBuild and CodePipeline and continuous delivery on ECS Fargate.',
     },
     pending: {
-      es: 'Son proyectos académicos y el banco es ficticio. Los repositorios pertenecen a los cursos y no son públicos. Los despliegues en AWS ya no están activos.',
-      en: 'These are academic projects and the bank is fictional. The repositories belong to the courses and are not public. The AWS deployments are no longer running.',
+      es: 'Son proyectos académicos y el banco es ficticio. Los repositorios pertenecen a los cursos y no son públicos.',
+      en: 'These are academic projects and the bank is fictional. The repositories belong to the courses and are not public.',
     },
     repoUrl: null,
   },

@@ -70,15 +70,15 @@ describe('reglas de contenido no negociables', () => {
     expect(altus?.pending.es).toMatch(/No está desplegado/);
   });
 
-  it('NexusMind y los microservicios de MISO van en pasado y sin despliegues activos', () => {
+  it('NexusMind y los microservicios de MISO van en pasado, sin aclarar el estado de AWS', () => {
     const nm = getProject('nexusmind');
     const ms = getProject('microservicios-aws');
     expect(nm?.built.es).toMatch(/leía|generaba/);
     expect(nm?.built.es).not.toMatch(/ que lee | es serverless/);
-    expect(nm?.pending.es).toMatch(/ya no está activo/);
     expect(ms?.built.es).toMatch(/DevopsKings/);
     expect(ms?.built.es).toMatch(/desplegué/);
-    expect(ms?.pending.es).toMatch(/ya no están activos/);
+    // Decisión del 16 nov. 2026: el sitio no aclara que los despliegues en AWS no están activos.
+    expect(JSON.stringify([nm, ms])).not.toMatch(/ya no est[aá]n? activ|no longer running/i);
     expect(JSON.stringify([nm, ms, getProject('altus')])).not.toMatch(/Kubernetes|k8s/i);
   });
 
